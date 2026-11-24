@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Melvor Idle 2 — 调度规划与状态面板</title>
+<style>
+  :root {
+    --bg: #0f141d;
+    --card: #171e2b;
+    --card2: #1e2738;
+    --border: #2a354a;
+    --text: #e6edf7;
+    --muted: #8c9bb5;
+    --accent: #4ea1ff;
+    --green: #38d399;
+    --yellow: #f6c453;
+    --red: #f87171;
+    --purple: #a78bfa;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 18px 20px 40px; }
+  header {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--border); margin-bottom: 16px;
+  }
+  .title { display: flex; align-items: center; gap: 10px; }
+  .title h1 { margin: 0; font-size: 20px; font-weight: 700; letter-spacing: 0.2px; }
+  .badges { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600;
+    background: var(--card2); border: 1px solid var(--border); color: var(--muted);
+  }
+  .badge.ok { color: var(--green); border-color: rgba(56,211,153,.4); background: rgba(56,211,153,.1); }
+  .badge.warn { color: var(--yellow); border-color: rgba(246,196,83,.45); background: rgba(246,196,83,.1); }
+  .badge.err { color: var(--red); border-color: rgba(248,113,113,.45); background: rgba(248,113,113,.12); }
+  .badge.info { color: var(--accent); border-color: rgba(78,161,255,.4); background: rgba(78,161,255,.1); }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+  .alert {
+    display: none; padding: 12px 16px; border-radius: 10px; margin-bottom: 16px;
+    border: 1px solid rgba(248,113,113,.5); background: rgba(248,113,113,.12); color: #fecaca;
+    font-size: 13px;
+  }
+  .alert.warn { border-color: rgba(246,196,83,.5); background: rgba(246,196,83,.1); color: #fde68a; }
+  .alert.show { display: block; }
+
+  .stats-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px; margin-bottom: 16px;
+  }
+  .stat-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 12px 14px;
+  }
+  .stat-label { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .stat-val { font-size: 18px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .stat-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  .grid { display: grid; grid-template-columns: 1.75fr 1fr; gap: 16px; align-items: start; }
+  @media (max-width: 980px) { .grid { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px; margin-bottom: 16px;
+  }
+  .panel-head {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 10px; margin-bottom: 12px;
+  }
+  .panel-head h2 { margin: 0; font-size: 16px; font-weight: 700; }
+
+  .btn-group { display: flex; flex-wrap: wrap; gap: 6px; }
+  button {
+    cursor: pointer; border: 1px solid var(--border); background: var(--card2);
+    color: var(--text); padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 600;
+    transition: all .15s ease;
+  }
+  button:hover:not(:disabled) { border-color: var(--accent); background: #253147; }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  button.primary { background: rgba(78,161,255,.18); border-color: rgba(78,161,255,.5); color: #93c5fd; }
+  button.danger { background: rgba(248,113,113,.14); border-color: rgba(248,113,113,.45); color: #fca5a5; }
+
+  .progress-wrap { background: #0c1018; border-radius: 999px; height: 10px; overflow: hidden; margin: 10px 0 6px; border: 1px solid var(--border); }
+  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--accent), var(--green)); transition: width .35s ease; }
+
+  .active-box {
+    background: linear-gradient(135deg, rgba(78,161,255,.11), rgba(56,211,153,.07));
+    border: 1px solid rgba(78,161,255,.4); border-radius: 10px; padding: 14px; margin: 12px 0;
+  }
+  .active-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .metrics { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .metrics b { color: var(--text); }
+
+  .tabs { display: flex; gap: 6px; margin: 12px 0 10px; }
+  .tab { padding: 4px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; background: transparent; border: 1px solid var(--border); color: var(--muted); }
+  .tab.active { background: var(--card2); color: var(--text); border-color: var(--accent); }
+
+  .step-list { display: flex; flex-direction: column; gap: 7px; max-height: 620px; overflow-y: auto; padding-right: 4px; }
+  .step {
+    display: grid; grid-template-columns: 32px 1fr auto; gap: 10px; align-items: start;
+    background: var(--card2); border: 1px solid var(--border); border-radius: 9px; padding: 10px 12px;
+    font-size: 13px;
+  }
+  .step.running { border-color: var(--accent); background: rgba(78,161,255,.1); }
+  .step.done { opacity: 0.72; border-color: rgba(56,211,153,.28); }
+  .step.failed { border-color: rgba(248,113,113,.5); background: rgba(248,113,113,.08); }
+  .step-idx {
+    width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; background: #121824; border: 1px solid var(--border); color: var(--muted);
+  }
+  .step.running .step-idx { background: var(--accent); color: #0b1018; border-color: var(--accent); }
+  .step.done .step-idx { background: rgba(56,211,153,.18); color: var(--green); border-color: rgba(56,211,153,.4); }
+  .step-main .step-label { font-weight: 600; color: var(--text); }
+  .step-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .pill {
+    font-size: 11px; padding: 2px 7px; border-radius: 5px;
+    background: #121824; border: 1px solid var(--border); color: var(--muted);
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  }
+  .pill.cond { color: #cbd5e1; border-color: #364561; }
+  .pill.op { color: var(--purple); border-color: rgba(167,139,250,.35); }
+  .pill.reason { color: var(--green); border-color: rgba(56,211,153,.35); }
+  .step-status { font-size: 12px; font-weight: 600; white-space: nowrap; }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; }
+  .skill-chip {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 5px 8px; border-radius: 7px; background: var(--card2); border: 1px solid var(--border);
+    font-size: 12px;
+  }
+  .skill-chip.active-skill { border-color: var(--accent); background: rgba(78,161,255,.14); }
+  .skill-lvl { font-weight: 700; color: var(--yellow); }
+
+  .quest-item {
+    padding: 8px 10px; border-radius: 8px; background: var(--card2); border: 1px solid var(--border);
+    margin-bottom: 6px; font-size: 12px;
+  }
+  .quest-item .qname { font-weight: 600; }
+  .muted { color: var(--muted); font-size: 12px; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+  footer { margin-top: 18px; text-align: center; color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="title">
+      <h1>Melvor Idle 2 调度规划面板</h1>
+      <span id="sourceBadge" class="badge"><span class="dot"></span>连接中…</span>
+      <span id="healthBadge" class="badge" title="点击查看 EA 兼容性详情" style="cursor:pointer" onclick="toggleHealth()">EA 兼容检查</span>
+    </div>
+    <div class="badges">
+      <label class="badge" style="cursor:pointer">
+        <input id="autoRefresh" type="checkbox" checked style="margin:0 4px 0 0" />自动刷新 (2s)
+      </label>
+      <button onclick="refreshAll()">立即刷新</button>
+    </div>
+  </header>
+
+  <div id="compatAlert" class="alert"></div>
+  <div id="healthPanel" class="panel" style="display:none">
+    <div class="panel-head">
+      <h2>EA 兼容性诊断报告 (<span class="mono">/health</span>)</h2>
+      <button onclick="toggleHealth()">关闭</button>
+    </div>
+    <pre id="healthJson" class="mono" style="margin:0; font-size:12px; max-height:260px; overflow:auto; color:#cbd5e1"></pre>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">角色 / 总等级</div>
+      <div class="stat-val" id="stChar">—</div>
+      <div class="stat-sub" id="stGp">GP: —</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">当前游戏内动作</div>
+      <div class="stat-val" id="stAction">—</div>
+      <div class="stat-sub" id="stActionSub">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">生命值 / 装备食物</div>
+      <div class="stat-val" id="stHp">—</div>
+      <div class="stat-sub" id="stFood">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">任务进度</div>
+      <div class="stat-val" id="stQuests">—</div>
+      <div class="stat-sub" id="stQuestsSub">—</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div>
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h2 id="planTitle">行动计划队列</h2>
+            <div class="muted" id="planMeta">—</div>
+          </div>
+          <div class="btn-group">
+            <button id="btnPause" onclick="planCmd('pause')">暂停</button>
+            <button id="btnResume" class="primary" onclick="planCmd('resume')">继续</button>
+            <button id="btnSkip" onclick="planCmd('skip')">跳过当前步</button>
+            <button id="btnCancel" class="danger" onclick="cancelPlan()">取消计划</button>
+          </div>
+        </div>
+
+        <div class="progress-wrap"><div id="planBar" class="progress-bar" style="width:0%"></div></div>
+        <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--muted)">
+          <span id="planPct">0 / 0 步</span>
+          <span id="planUpdated">—</span>
+        </div>
+
+        <div id="activeStepBox" class="active-box" style="display:none">
+          <div class="active-title">
+            <span class="badge info">执行中</span>
+            <span id="curLabel">—</span>
+          </div>
+          <div class="step-meta" id="curConds"></div>
+          <div class="metrics">
+            <span>已运行：<b id="curElapsed">0s</b></span>
+            <span>主动作次数：<b id="curActions">0</b></span>
+            <span>击杀数：<b id="curKills">0</b></span>
+            <span>地下城：<b id="curDungeons">0</b></span>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active" data-filter="all" onclick="setFilter('all')">全部步骤</button>
+          <button class="tab" data-filter="upcoming" onclick="setFilter('upcoming')">当前与待执行</button>
+          <button class="tab" data-filter="done" onclick="setFilter('done')">已完成记录</button>
+        </div>
+
+        <div id="stepList" class="step-list">
+          <div class="muted">暂无已加载的行动计划。</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel">
+        <div class="panel-head">
+          <h2>任务概览 (Quests)</h2>
+        </div>
+        <div id="questsList"><div class="muted">等待状态数据…</div></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h2>技能等级 (25 项)</h2>
+        </div>
+        <div id="skillsGrid" class="skills-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Melvor Idle 2 MCP v2 Dashboard · 实时桥接 <code>127.0.0.1:17817</code>（游戏关闭时自动回退读取本地存档与 <code>melvor2_plan.json</code>）
+  </footer>
+</div>
+
+<script>
+let currentFilter = 'all';
+let lastPlan = null;
+let lastState = null;
+let lastHealth = null;
+let liveConnected = false;
+
+// Works both when served directly by bridge (:17817) and when served via standalone proxy (:17818)
+const API_BASE = window.location.protocol.startsWith('http') ? '' : 'http://127.0.0.1:17817';
+
+function shortId(s) {
+  if (!s) return '';
+  const i = String(s).indexOf(':');
+  return i >= 0 ? String(s).slice(i + 1) : String(s);
+}
+
+function fmtDur(sec) {
+  sec = Math.max(0, Math.round(sec || 0));
+  const h = Math.floor(sec / 3600);
+  const m = Math.floor((sec % 3600) / 60);
+  const s = sec % 60;
+  if (h > 0) return `${h}h ${m}m ${s}s`;
+  if (m > 0) return `${m}m ${s}s`;
+  return `${s}s`;
+}
+
+function fmtUntil(u, mode) {
+  if (!u) return ['瞬时操作'];
+  const pills = [];
+  if (u.duration_seconds) pills.push(`限时 ${fmtDur(u.duration_seconds)}`);
+  if (u.action_count) pills.push(`动作 ≥ ${u.action_count}次`);
+  if (u.sub_action_count) pills.push(`子动作 ≥ ${u.sub_action_count}次`);
+  if (u.kill_count) pills.push(`击杀 ≥ ${u.kill_count}`);
+  if (u.dungeon_count) pills.push(`地下城 ≥ ${u.dungeon_count}`);
+  if (u.item_qty) {
+    const it = shortId(u.item_qty.item);
+    if (u.item_qty.gte != null) pills.push(`${it} ≥ ${u.item_qty.gte}`);
+    if (u.item_qty.lte != null) pills.push(`${it} ≤ ${u.item_qty.lte}`);
+  }
+  if (u.item_gained) pills.push(`净增 ${shortId(u.item_gained.item)} +${u.item_gained.amount}`);
+  if (u.skill_level) pills.push(`${u.skill_level.skill} ≥ Lv.${u.skill_level.gte}`);
+  if (u.quest_step_done) pills.push(`任务完成 ${shortId(u.quest_step_done.quest)}`);
+  if (u.until_exhausted) pills.push('材料耗尽自动推进');
+  if (pills.length > 1 && mode === 'all') pills.unshift('需全部满足');
+  return pills.length ? pills : ['无终止条件'];
+}
+
+function fmtParams(op, p) {
+  if (!p) return '';
+  const parts = [];
+  if (p.entity) parts.push(shortId(p.entity));
+  if (p.recipe) parts.push(shortId(p.recipe));
+  if (p.area) parts.push(shortId(p.area));
+  if (p.enemy) parts.push(shortId(p.enemy));
+  if (p.dungeon) parts.push(shortId(p.dungeon));
+  if (p.purchase) parts.push(shortId(p.purchase));
+  if (p.item) parts.push(shortId(p.item));
+  if (p.quest) parts.push(shortId(p.quest));
+  if (p.quantity != null) parts.push(`×${p.quantity}`);
+  return parts.join(' · ');
+}
+
+function setFilter(f) {
+  currentFilter = f;
+  document.querySelectorAll('.tab').forEach(el => el.classList.toggle('active', el.dataset.filter === f));
+  renderPlan();
+}
+
+function toggleHealth() {
+  const el = document.getElementById('healthPanel');
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+async function fetchJson(path, opts) {
+  const r = await fetch(API_BASE + path, opts);
+  return await r.json();
+}
+
+async function planCmd(act, body) {
+  try {
+    await fetchJson('/plan/' + act, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body || {})
+    });
+    await refreshAll();
+  } catch (e) {
+    alert('操作失败（游戏可能未运行）：' + e.message);
+  }
+}
+
+function cancelPlan() {
+  if (!confirm('确定取消当前行动计划吗？')) return;
+  const stopAct = confirm('是否同时停止当前游戏内正在进行的动作？');
+  planCmd('cancel', { stop_action: stopAct });
+}
+
+function renderHealth() {
+  const badge = document.getElementById('healthBadge');
+  const alertEl = document.getElementById('compatAlert');
+  const pre = document.getElementById('healthJson');
+  if (!lastHealth) {
+    badge.className = 'badge';
+    badge.textContent = 'EA 兼容：离线';
+    alertEl.className = 'alert';
+    return;
+  }
+  pre.textContent = JSON.stringify(lastHealth, null, 2);
+  const st = lastHealth.status || (lastHealth.compatible ? 'healthy' : 'incompatible');
+  if (st === 'healthy') {
+    badge.className = 'badge ok';
+    badge.innerHTML = '<span class="dot"></span>EA 兼容正常';
+    alertEl.className = 'alert';
+  } else if (st === 'degraded') {
+    badge.className = 'badge warn';
+    badge.innerHTML = `<span class="dot"></span>EA 部分降级 (${(lastHealth.warnings||[]).length})`;
+    alertEl.className = 'alert warn show';
+    alertEl.innerHTML = `<b>EA 更新降级警告：</b>检测到 ${(lastHealth.warnings||[]).length} 项非致命反射差异，核心功能仍可用。详细报告：<code>${lastHealth.report_file || 'melvor2_compat_report.json'}</code>（点击右上角徽章查看）`;
+  } else if (st === 'incompatible') {
+    badge.className = 'badge err';
+    badge.innerHTML = '<span class="dot"></span>EA 不兼容已安全停机';
+    alertEl.className = 'alert show';
+    alertEl.innerHTML = `<b>连接器已优雅退出：</b>${lastHealth.disable_reason || '检测到 EA 更新导致核心接口变更'}。游戏本体不受影响；诊断报告已保存至 <code>${lastHealth.report_file || 'melvor2_compat_report.json'}</code> 供后续修复。`;
+  } else {
+    badge.className = 'badge info';
+    badge.innerHTML = `<span class="dot"></span>${st}`;
+    alertEl.className = 'alert';
+  }
+}
+
+function renderState() {
+  if (!lastState || lastState.error) {
+    document.getElementById('stChar').textContent = '等待进入存档…';
+    document.getElementById('stGp').textContent = lastState?.error || '—';
+    return;
+  }
+  document.getElementById('stChar').textContent = `${lastState.character || '—'} · Lv.${lastState.total_level ?? '—'}`;
+  const gp = (lastState.currencies && lastState.currencies['MelvorBase:GoldPieces']) ?? lastState.gold_pieces ?? 0;
+  document.getElementById('stGp').textContent = `GP: ${Number(gp).toLocaleString()}`;
+
+  const acts = lastState.active_actions || [];
+  let activeEntityShort = '';
+  if (acts.length > 0) {
+    const a = acts[0];
+    activeEntityShort = shortId(a.entity);
+    document.getElementById('stAction').textContent = `${activeEntityShort} · ${a.action || shortId(a.action_id)}`;
+    const waitMs = a.timer_wait_ms ? `${(a.timer_wait_ms/1000).toFixed(2)}s/次` : (a.started ? '运行中' : '已暂停');
+    document.getElementById('stActionSub').textContent = waitMs;
+  } else if (lastState.active && lastState.active.entity) {
+    activeEntityShort = lastState.active.entity;
+    document.getElementById('stAction').textContent = `${lastState.active.entity} · ${lastState.active.action}`;
+    document.getElementById('stActionSub').textContent = '来自存档快照';
+  } else {
+    document.getElementById('stAction').textContent = '空闲 (Idle)';
+    document.getElementById('stActionSub').textContent = '当前无活跃主动作';
+  }
+
+  if (lastState.health) {
+    document.getElementById('stHp').textContent = `${Math.round(lastState.health.current)} / ${Math.round(lastState.health.max)}`;
+  } else {
+    document.getElementById('stHp').textContent = '—';
+  }
+  if (lastState.selected_food) {
+    document.getElementById('stFood').textContent = `食物: ${lastState.selected_food.name || shortId(lastState.selected_food.id)} ×${lastState.selected_food.quantity}`;
+  } else {
+    document.getElementById('stFood').textContent = '未装备食物或离线模式';
+  }
+
+  const qs = lastState.quests_summary || {};
+  document.getElementById('stQuests').textContent = `进行中 ${qs.in_progress ?? qs.InProgress ?? 0} · 可领奖 ${qs.claimable ?? qs.Completed ?? 0}`;
+  document.getElementById('stQuestsSub').textContent = `已完成领奖 ${qs.claimed ?? qs.Claimed ?? 0}`;
+
+  // Quests box
+  const qBox = document.getElementById('questsList');
+  const activeIds = qs.active_ids || [];
+  const claimIds = qs.claimable_ids || [];
+  let qHtml = '';
+  claimIds.forEach(id => {
+    qHtml += `<div class="quest-item" style="border-color:rgba(56,211,153,.5)"><span class="badge ok" style="margin-right:6px">可领奖</span><span class="qname">${shortId(id)}</span></div>`;
+  });
+  activeIds.forEach(id => {
+    qHtml += `<div class="quest-item"><span class="badge info" style="margin-right:6px">进行中</span><span class="qname">${shortId(id)}</span></div>`;
+  });
+  if (!qHtml) {
+    qHtml = `<div class="muted">已完成 ${qs.claimed ?? qs.Claimed ?? 0} 个任务 · 进行中 ${qs.in_progress ?? qs.InProgress ?? 0} 个</div>`;
+  }
+  qBox.innerHTML = qHtml;
+
+  // Skills grid
+  const sg = document.getElementById('skillsGrid');
+  const skills = lastState.skills || {};
+  const entries = Object.entries(skills).sort((a, b) => a[0].localeCompare(b[0]));
+  sg.innerHTML = entries.map(([name, val]) => {
+    const lvl = typeof val === 'object' ? val.level : val;
+    const isAct = activeEntityShort && name.toLowerCase() === activeEntityShort.toLowerCase();
+    return `<div class="skill-chip ${isAct ? 'active-skill' : ''}"><span>${name}</span><span class="skill-lvl">${lvl}</span></div>`;
+  }).join('');
+}
+
+function renderPlan() {
+  const pState = lastPlan;
+  const listEl = document.getElementById('stepList');
+  const activeBox = document.getElementById('activeStepBox');
+
+  if (!pState || !pState.plan || !pState.plan.steps) {
+    document.getElementById('planTitle').textContent = '行动计划队列（空闲）';
+    document.getElementById('planMeta').textContent = '尚未下发计划，可在对话中让 Agent 规划并提交。';
+    document.getElementById('planBar').style.width = '0%';
+    document.getElementById('planPct').textContent = '0 / 0 步';
+    activeBox.style.display = 'none';
+    listEl.innerHTML = '<div class="muted">暂无步骤。</div>';
+    return;
+  }
+
+  const plan = pState.plan;
+  const steps = plan.steps || [];
+  const curIdx = pState.current_index ?? 0;
+  const status = pState.status || 'idle';
+  const histMap = {};
+  (pState.history || []).forEach(h => { histMap[h.step_index] = h; });
+
+  document.getElementById('planTitle').textContent = plan.name || '未命名计划';
+  const stMap = { running: '执行中', paused: '已暂停', pending_start: '等待进存档自动启动', completed: '全部完成', failed: '执行失败', cancelled: '已取消', incompatible: 'EA 不兼容停机' };
+  document.getElementById('planMeta').textContent = `状态：${stMap[status] || status}${pState.status_reason ? ' · ' + pState.status_reason : ''}`;
+
+  const doneCount = Math.min(curIdx, steps.length);
+  const pct = steps.length ? Math.round((doneCount / steps.length) * 100) : 0;
+  document.getElementById('planBar').style.width = pct + '%';
+  document.getElementById('planPct').textContent = `${doneCount} / ${steps.length} 步 (${pct}%)`;
+  document.getElementById('planUpdated').textContent = pState.updated_at_utc ? ('更新于 ' + new Date(pState.updated_at_utc).toLocaleTimeString()) : '';
+
+  document.getElementById('btnPause').disabled = !liveConnected || status !== 'running';
+  document.getElementById('btnResume').disabled = !liveConnected || (status !== 'paused' && status !== 'pending_start');
+  document.getElementById('btnSkip').disabled = !liveConnected || curIdx >= steps.length || status === 'completed' || status === 'cancelled';
+  document.getElementById('btnCancel').disabled = !liveConnected || status === 'completed' || status === 'cancelled' || status === 'idle';
+
+  // Active step live card
+  if ((status === 'running' || status === 'paused') && curIdx < steps.length) {
+    const s = steps[curIdx];
+    const prog = pState.current_step_progress || {};
+    activeBox.style.display = 'block';
+    document.getElementById('curLabel').textContent = `#${curIdx} ${s.label || s.op}`;
+    document.getElementById('curElapsed').textContent = fmtDur(prog.elapsed_seconds || 0);
+    document.getElementById('curActions').textContent = prog.action_count ?? 0;
+    document.getElementById('curKills').textContent = prog.kill_count ?? 0;
+    document.getElementById('curDungeons').textContent = prog.dungeon_count ?? 0;
+    const pills = [
+      `<span class="pill op">${s.op}</span>`,
+      fmtParams(s.op, s.params) ? `<span class="pill">${fmtParams(s.op, s.params)}</span>` : '',
+      ...fmtUntil(s.until, s.until_mode).map(c => `<span class="pill cond">${c}</span>`)
+    ].filter(Boolean);
+    document.getElementById('curConds').innerHTML = pills.join('');
+  } else {
+    activeBox.style.display = 'none';
+  }
+
+  // Step timeline
+  const rows = [];
+  steps.forEach((s, i) => {
+    const h = histMap[i];
+    let cls = 'pending';
+    let stText = '⏳ 待执行';
+    if (h) {
+      cls = h.outcome === 'failed' ? 'failed' : 'done';
+      stText = h.outcome === 'skipped' ? '⏭ 已跳过' : (h.outcome === 'failed' ? '❌ 失败' : `✅ ${fmtDur(h.elapsed_seconds)}`);
+    } else if (i < curIdx) {
+      cls = 'done'; stText = '✅ 已完成';
+    } else if (i === curIdx && (status === 'running' || status === 'paused')) {
+      cls = 'running'; stText = status === 'paused' ? '⏸ 已暂停' : '▶ 执行中';
+    }
+
+    if (currentFilter === 'upcoming' && cls === 'done') return;
+    if (currentFilter === 'done' && cls !== 'done' && cls !== 'failed') return;
+
+    const pText = fmtParams(s.op, s.params);
+    const conds = fmtUntil(s.until, s.until_mode).map(c => `<span class="pill cond">${c}</span>`).join('');
+    const histReason = h ? `<span class="pill reason">${h.reason}${h.action_count ? ` · ${h.action_count}次` : ''}${h.kill_count ? ` · ${h.kill_count}杀` : ''}</span>` : '';
+
+    rows.push(`
+      <div class="step ${cls}">
+        <div class="step-idx">${i}</div>
+        <div class="step-main">
+          <div class="step-label">${s.label || s.op}</div>
+          <div class="step-meta">
+            <span class="pill op">${s.op}</span>
+            ${pText ? `<span class="pill">${pText}</span>` : ''}
+            ${conds}
+            ${histReason}
+          </div>
+        </div>
+        <div class="step-status">${stText}</div>
+      </div>
+    `);
+  });
+
+  listEl.innerHTML = rows.length ? rows.join('') : '<div class="muted">当前筛选下无步骤。</div>';
+}
+
+async function refreshAll() {
+  const srcBadge = document.getElementById('sourceBadge');
+  try {
+    const [ping, plan, state] = await Promise.all([
+      fetchJson('/ping'),
+      fetchJson('/plan/status'),
+      fetchJson('/state')
+    ]);
+    liveConnected = !!ping.ok && !ping.offline_fallback;
+    if (liveConnected) {
+      srcBadge.className = 'badge ok';
+      srcBadge.innerHTML = `<span class="dot"></span>实时桥接 v${ping.version || '2.0'}${ping.game_found ? '' : ' (主菜单)'}`;
+    } else {
+      srcBadge.className = 'badge warn';
+      srcBadge.innerHTML = '<span class="dot"></span>离线存档模式';
+    }
+    lastPlan = plan;
+    lastState = state;
+    try { lastHealth = await fetchJson('/health'); } catch { lastHealth = null; }
+  } catch (e) {
+    liveConnected = false;
+    srcBadge.className = 'badge err';
+    srcBadge.innerHTML = '<span class="dot"></span>未连接到桥接';
+  }
+  renderHealth();
+  renderState();
+  renderPlan();
+}
+
+refreshAll();
+setInterval(() => {
+  if (document.getElementById('autoRefresh').checked) refreshAll();
+}, 2000);
+</script>
+</body>
+</html>

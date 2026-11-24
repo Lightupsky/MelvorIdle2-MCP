@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- net8.0 for [UnmanagedCallersOnly] (native bootstrap entry point);
+         the assembly still has no package deps and loads on any later
+         runtime, including the game's self-contained .NET 10. -->
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyName>Melvor2BridgeHook</AssemblyName>
+    <RootNamespace>Melvor2Bridge</RootNamespace>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\dashboard\index.html" LogicalName="dashboard.html" />
+  </ItemGroup>
+
+</Project>

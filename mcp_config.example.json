@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "melvor-idle-2": {
+      "command": "<INSTALL_DIR>\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "melvor2_mcp"],
+      "cwd": "<INSTALL_DIR>",
+      "env": {
+        "MELVOR2_BRIDGE_PORT": "17817"
+      }
+    }
+  }
+}

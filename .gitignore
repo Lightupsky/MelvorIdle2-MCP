@@ -1,0 +1,30 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Local generated configs & extracted proprietary game assets
+mcp_config.local.json
+knowledge/data/MelvorBase.json
+knowledge/data/*.po
+knowledge/data/extract_meta.json
+knowledge/data/content_dump.json
+knowledge/data/decompiled/
+
+# .NET build intermediates (prebuilt release binaries are kept)
+**/obj/
+**/*.pdb
+bridge/*.o
+
+# Release output folder & large video binary (uploaded as GitHub Release assets)
+Publish/
+Branding/*.mp4
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

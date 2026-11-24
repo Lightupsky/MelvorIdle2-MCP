@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "melvor2-mcp"
+version = "0.0.1"
+description = "MCP connector, offline knowledge extractor, and autonomous action plan scheduler for Melvor Idle 2 (tested with v0.11.6-alpha.1 / 0116a1)."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=2.0.0",
+]
+
+[project.scripts]
+melvor2-mcp = "melvor2_mcp.server:main"
+melvor2-dashboard = "melvor2_mcp.dashboard:main"
+
+[tool.setuptools.packages.find]
+include = ["melvor2_mcp*"]

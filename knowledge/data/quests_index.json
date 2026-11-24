@@ -1,0 +1,3320 @@
+[
+  {
+    "id": "MelvorBase:MQ1",
+    "name": "Pointy Preparation",
+    "name_zh": "准备尖锐的武器",
+    "category": "MelvorBase:Act1",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "2,000 Gold Pieces, 150× Stone Arrows, 50× Shrimp",
+    "steps": [
+      {
+        "id": "0",
+        "description": "Just putting some pointy rocks on some wood, nothing too tough.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:StoneArrows",
+                "name": "Stone Arrows",
+                "qty": 24
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "If I didn't know better, I'd say they were aiming at me.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "击杀 3× Archery Target [Ranged]"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ2",
+    "name": "Fishin' for Trouble",
+    "name_zh": "钓鱼钓出大麻烦",
+    "category": "MelvorBase:Act1",
+    "requirements": [
+      "Quest:Pointy Preparation(MQ1)"
+    ],
+    "prereq_quests": [
+      "MelvorBase:MQ1"
+    ],
+    "rewards": "5,000 Gold Pieces, 100× Copper Bar",
+    "steps": [
+      {
+        "id": "0",
+        "description": "Swords are plenty sharp, that'll do.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:CopperSword",
+                "name": "Copper Sword",
+                "qty": 3
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "Just catch some fish and don't look suspicious. Easy.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "通过 Fishing 获取 15× Raw Sardine"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "I'm not going to let [Companion Name] beat me!",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "击杀 5× Golbin Ambusher"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ3",
+    "name": "Boarish Bonfire",
+    "name_zh": "生篝火烤野猪",
+    "category": "MelvorBase:Act1",
+    "requirements": [
+      "Quest:Fishin' for Trouble(MQ2)"
+    ],
+    "prereq_quests": [
+      "MelvorBase:MQ2"
+    ],
+    "rewards": "10,000 Gold Pieces, 150× Trout, 15× Bird Nest, 15× Geode, 5× Oak Tree Seed",
+    "steps": [
+      {
+        "id": "0",
+        "description": "A little cleanup could go a long way to making things feel a bit more put together.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "伐木 1× WoodDebris",
+              "采矿 1× StoneDebris"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "Nothing too flashy, just gotta pull up enough fish to show them how it's done.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:MackerelBait",
+                "name": "Mackerel Bait",
+                "qty": 50
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [
+              "通过 Fishing 获取 15× Raw Trout"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "There's no helping it, then!",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "击杀 1× Enraged Boar"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ4",
+    "name": "Misty Reconnaissance",
+    "name_zh": "迷雾里探路",
+    "category": "MelvorBase:Act1",
+    "requirements": [
+      "Quest:Boarish Bonfire(MQ3)"
+    ],
+    "prereq_quests": [
+      "MelvorBase:MQ3"
+    ],
+    "rewards": "20,000 Gold Pieces, 250× Leather, 250× Iron Bar, 250× Steel Bar",
+    "steps": [
+      {
+        "id": "0",
+        "description": "I should be able to follow Gloob's schematics easy enough.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "Smithing 制作 6× ClimbingHook",
+              "Crafting 制作 3× ClimbingGloves",
+              "Crafting 制作 3× ClimbingBoots",
+              "Crafting 制作 3× ClimbingRope",
+              "Crafting 制作 3× ClimbingHarness"
+            ],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:ClimbingHook",
+                "name": "Climbing Hook",
+                "qty": 6
+              },
+              {
+                "item": "MelvorBase:ClimbingGloves",
+                "name": "Climbing Gloves",
+                "qty": 3
+              },
+              {
+                "item": "MelvorBase:ClimbingBoots",
+                "name": "Climbing Boots",
+                "qty": 3
+              },
+              {
+                "item": "MelvorBase:ClimbingRope",
+                "name": "Climbing Rope",
+                "qty": 3
+              },
+              {
+                "item": "MelvorBase:ClimbingHarness",
+                "name": "Climbing Harness",
+                "qty": 3
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ5",
+    "name": "Rocky Rumble",
+    "name_zh": "乱石大混战",
+    "category": "MelvorBase:Act1",
+    "requirements": [
+      "Quest:Misty Reconnaissance(MQ4)"
+    ],
+    "prereq_quests": [
+      "MelvorBase:MQ4"
+    ],
+    "rewards": "25,000 Gold Pieces, 2× Hobforge Gloves, 500× Coal, 500× Rune Essence, 150× Uncut Topaz, 150× Uncut Sapphire",
+    "steps": [
+      {
+        "id": "0",
+        "description": "Chisel first, then make them into volatile bombs. Easy.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "Crafting 制作 1× SulfurProtectionGloves"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:VolatileFireRune",
+                "name": "Volatile Fire Rune",
+                "qty": 25
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "I don't suppose they're interested in talking this one out.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "击杀 5× Grumpy Golem"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "Maybe I should ask someone in the mines..? Nah, what's the worst that could happen?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:SteelRockAnchor",
+                "name": "Steel Rock Anchor",
+                "qty": 10
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [
+              "Crafting 制作 10× CanyonSupport"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ6",
+    "name": "Dungeon Breakout",
+    "name_zh": "逃出地牢",
+    "category": "MelvorBase:Act1",
+    "requirements": [
+      "Quest:Rocky Rumble(MQ5)"
+    ],
+    "prereq_quests": [
+      "MelvorBase:MQ5"
+    ],
+    "rewards": "30,000 Gold Pieces, 250× Oak Log, 200× Willow Log",
+    "steps": [
+      {
+        "id": "0",
+        "description": "Gold coins aren't good enough, eh?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:SilverBar",
+                "name": "Silver Bar",
+                "qty": 10
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "Just press it into the wall and cut, no problem.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "伐木 1× FortressWall1"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [
+              "Smithing 制作 1× ReinforcedWoodcuttersAxe"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "2",
+            "goals": [
+              "伐木 1× FortressWall2"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ7",
+    "name": "Tree Trimming",
+    "name_zh": "疯狂砍树",
+    "category": "MelvorBase:Act1",
+    "requirements": [
+      "Quest:Dungeon Breakout(MQ6)"
+    ],
+    "prereq_quests": [
+      "MelvorBase:MQ6"
+    ],
+    "rewards": "35,000 Gold Pieces, 100× Strawberry Cake, 20× Bird Nest",
+    "steps": [
+      {
+        "id": "0",
+        "description": "Good food always makes you feel better.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:StrawberryCake",
+                "name": "Strawberry Cake",
+                "qty": 5
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "Time for a little bit of payback.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "击杀 1× Tainted Treant"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "Let's make them a bit smaller, turned into ash.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "通过 Woodcutting 获取 25× Treant Remains"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [
+              "生火燃烧 25× TreantRemains"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ8",
+    "name": "In the Thick of It",
+    "name_zh": "陷入激战",
+    "category": "MelvorBase:Act1",
+    "requirements": [
+      "Quest:Tree Trimming(MQ7)"
+    ],
+    "prereq_quests": [
+      "MelvorBase:MQ7"
+    ],
+    "rewards": "80,000 Gold Pieces, 200× Banana Pancake, 2000× Mithril Javelin, 3000× Air Rune, 3000× Water Rune, 3000× Earth Rune, 3000× Fire Rune, 1500× Chaos Rune",
+    "steps": [
+      {
+        "id": "0",
+        "description": "If I want any supplies, I should take them from the cart before the attack starts in earnest.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "生火燃烧 1× Brazier1",
+              "生火燃烧 1× Brazier2",
+              "生火燃烧 1× Brazier3"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "We have to get through this gate!",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "伐木 1× FortGate"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "We will not fall. Not this time.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "击杀 1× Ringleader"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ9",
+    "name": "Sand in the Wind",
+    "name_zh": "风中的沙",
+    "category": "MelvorBase:Act2",
+    "requirements": [
+      "Quest:In the Thick of It(MQ8)"
+    ],
+    "prereq_quests": [
+      "MelvorBase:MQ8"
+    ],
+    "rewards": "60,000 Gold Pieces, 250× Mithril Bar, 250× Chicken Sandwich, 3× Teak Tree Seed",
+    "steps": [
+      {
+        "id": "0",
+        "description": "They travelled a long, long way.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "狩猎捕获 1× PrisonerWagon"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "I should provide some basic supplies to help.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:TeakLog",
+                "name": "Teak Log",
+                "qty": 75
+              },
+              {
+                "item": "MelvorBase:SteelSword",
+                "name": "Steel Sword",
+                "qty": 25
+              },
+              {
+                "item": "MelvorBase:SteelShield",
+                "name": "Steel Shield",
+                "qty": 25
+              },
+              {
+                "item": "MelvorBase:SteelPlatebody",
+                "name": "Steel Platebody",
+                "qty": 25
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "Wow, they're well stocked. That's helpful, at least.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:ReliefRationsMeat",
+                "name": "Relief Rations (Meat)",
+                "qty": 5
+              },
+              {
+                "item": "MelvorBase:ReliefRationsSeafood",
+                "name": "Relief Rations (Seafood)",
+                "qty": 5
+              },
+              {
+                "item": "MelvorBase:ReliefRationsVeggie",
+                "name": "Relief Rations (Veggie)",
+                "qty": 5
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ10",
+    "name": "The Path to Melvor",
+    "name_zh": "通往梅尔沃之路",
+    "category": "MelvorBase:Act2",
+    "requirements": [
+      "Quest:Sand in the Wind(MQ9)"
+    ],
+    "prereq_quests": [
+      "MelvorBase:MQ9"
+    ],
+    "rewards": "80,000 Gold Pieces, 2× Careful Extractor Gloves, 250× Mithril Lantern (Lit), 1000× Lockpick, 250× Gold Bar, 150× Salmon; Unlocks the Silted Oasis Combat Area.",
+    "steps": [
+      {
+        "id": "0",
+        "description": "With enough of these, we should be able to make it to Clearwater!",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "击杀 1× Silkback Scarab",
+              "通过 Combat 获取 1× Silkback Fibre",
+              "击杀 1× Siltspinner",
+              "通过 Combat 获取 1× Silt Webbing",
+              "通过 Crafting 获取 1× Cacti Filter",
+              "通过 Crafting 获取 1× Filtered Vial"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [
+              "伐木 1× WarpedCacti",
+              "通过 Woodcutting 获取 1× Warped Cacti Water"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "That hurt, but I guess it's fair.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "击杀 1× Dancing Cactus"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "Individually, these aren't too bad.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "通过 Beastcrafting 获取 1× Stonehopper Gloves"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [
+              "狩猎捕获 5× StonehopperWhelp"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "description": "Hopefully this will persuade them to come out and say hello.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "生火燃烧 3× StonehopperSmokeOut"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "description": "You'd really better taste good.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "通过 Crafting 获取 1× Gas Mask"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [
+              "击杀 1× Mature Stonehopper"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "5",
+        "description": "I mean... They won't mind if we borrow them, right?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "窃取 1× CapitalGuard"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [
+              "通过 Thieving 获取 2× Confiscated Visitor Pass"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ11",
+    "name": "The Big City",
+    "name_zh": "大城市",
+    "category": "MelvorBase:Act2",
+    "requirements": [
+      "Quest:The Path to Melvor(MQ10)"
+    ],
+    "prereq_quests": [
+      "MelvorBase:MQ10"
+    ],
+    "rewards": "90,000 Gold Pieces, 250× Adamantite Bar, 250× Maple Log; Unlocks the Sea Cliffside Combat Area",
+    "steps": [
+      {
+        "id": "0",
+        "description": "Here they come!",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "击杀 10× Sea Griffin"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "He'd better win.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "通过 Fletching 获取 100× Sea Griffin Arrow"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:SeaGriffinArrow",
+                "name": "Sea Griffin Arrow",
+                "qty": 100
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "None of this looks too rare, thankfully.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "通过 Hunting 获取 4× Toxic Butterfly in a Jar"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [
+              "通过 Herblore 获取 1× True-Shot Potion"
+            ],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:TrueShotPotion",
+                "name": "True-Shot Potion",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ12",
+    "name": "The Ivory Athenaeum",
+    "name_zh": "象牙藏书院",
+    "category": "MelvorBase:Act2",
+    "requirements": [
+      "Quest:The Big City(MQ11)"
+    ],
+    "prereq_quests": [
+      "MelvorBase:MQ11"
+    ],
+    "rewards": "110,000 Gold Pieces; (Coming Soon) Unlocks the Summoning Skill (Coming Soon) Unlocks the Ivory Athenaeum Thieving Location (Summoning themed)",
+    "steps": [
+      {
+        "id": "0",
+        "description": "This mission might be next to impossible.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "通过 Runecrafting 获取 1× Ivory Athenaeum Hood",
+              "通过 Runecrafting 获取 1× Ivory Athenaeum Robe",
+              "通过 Runecrafting 获取 1× Ivory Athenaeum Bottoms"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [
+              "窃取 1× Archivist",
+              "通过 Thieving 获取 1× Ivory Athenaeum Key"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "2",
+            "goals": [
+              "窃取 1× LowerFloors",
+              "通过 Thieving 获取 1× Map of Lower Floors",
+              "通过 Thieving 获取 1× Abyssal Vault Key Mould"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "The vision proved particularly useful, didn't it?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "通过 Smithing 获取 1× Abyssal Bar",
+              "通过 Smithing 获取 1× Abyssal Vault Key",
+              "窃取 1× AbyssalVaultDoor"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "I don't think he's going to let us out of here.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "通关 1× AbyssalVault"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "description": "We need to escape, NOW!",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "敏捷完成 1× AbyssalVaultEscape"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ13",
+    "name": "Unfortunate Teller",
+    "name_zh": "倒霉的占卜师",
+    "category": "MelvorBase:Act2",
+    "requirements": [
+      "Quest:The Ivory Athenaeum(MQ12)"
+    ],
+    "prereq_quests": [
+      "MelvorBase:MQ12"
+    ],
+    "rewards": "120,000 Gold Pieces, 100× Reinforced Snare, 100× Reinforced Small Bird Catcher",
+    "steps": [
+      {
+        "id": "0",
+        "description": "I doubt Talm will let us take his equipment after this. The recipe won't do us any good afterwards.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "狩猎捕获 1× YellowtailBird",
+              "通过 Hunting 获取 1× Dreamleaf",
+              "通过 Beastcrafting 获取 3× Ground Dreamleaf",
+              "通过 Herblore 获取 1× Seer's Incense"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [
+              "生火燃烧 1× SeersIncense"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "We can take them.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "击杀 3× Soulsmith Novice",
+              "击杀 3× Soulsmith Whelp"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ14",
+    "name": "Starlit Sky",
+    "name_zh": "星光满天",
+    "category": "MelvorBase:Act2",
+    "requirements": [
+      "Quest:Unfortunate Teller(MQ13)"
+    ],
+    "prereq_quests": [
+      "MelvorBase:MQ13"
+    ],
+    "rewards": "130,000 Gold Pieces, 500× Stardust, 100× Cherry Pie",
+    "steps": [
+      {
+        "id": "0",
+        "description": "I need to improve my techniques.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [
+              "AgilityTech:Climbing Lv.20",
+              "AgilityTech:Jumping Lv.20",
+              "AgilityTech:Evading Lv.20"
+            ],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "Not these again...",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "击杀 6× Soulsmith Novice",
+              "击杀 6× Soulsmith Whelp"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "What does Era wish for us to see?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "占星观测 1× MQ14Ceedyr",
+              "占星观测 1× MQ14Iridan",
+              "占星观测 1× MQ14Syllia"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ15",
+    "name": "Cold Plunge",
+    "name_zh": "寒地探秘",
+    "category": "MelvorBase:Act2",
+    "requirements": [
+      "Quest:Starlit Sky(MQ14)"
+    ],
+    "prereq_quests": [
+      "MelvorBase:MQ14"
+    ],
+    "rewards": "160,000 Gold Pieces, 350× Yew Log, 2500× Coal, 100× Emerald",
+    "steps": [
+      {
+        "id": "0",
+        "description": "Melting alone won't do it. We'll need to hack away at the ice, too.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "通过 Crafting 获取 1× Warm Hat",
+              "通过 Crafting 获取 1× Warm Body",
+              "通过 Crafting 获取 1× Warm Legs",
+              "通过 Crafting 获取 1× Warm Boots",
+              "通过 Crafting 获取 1× Warm Gloves"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [
+              "生火燃烧 3× MapleLog"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "2",
+            "goals": [
+              "采矿 1× IcyDoorway"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "3",
+            "goals": [
+              "生火燃烧 3× MahoganyLog"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "4",
+            "goals": [
+              "采矿 1× IcyDoorway"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "5",
+            "goals": [
+              "生火燃烧 3× YewLog"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "6",
+            "goals": [
+              "采矿 1× IcyDoorway"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "Good morning?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "击杀 1× Ice Yeti"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ16",
+    "name": "Ship Shape",
+    "name_zh": "修船出海",
+    "category": "MelvorBase:Act2",
+    "requirements": [
+      "Quest:Cold Plunge(MQ15)"
+    ],
+    "prereq_quests": [
+      "MelvorBase:MQ15"
+    ],
+    "rewards": "160,000 Gold Pieces, 25× Eagle Nest, 250× Elk Hide, 250× Runite Bar",
+    "steps": [
+      {
+        "id": "0",
+        "description": "Head inland enough, should be able to grow something.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "农耕种植 1× Corn",
+              "农耕种植 1× Watermelon",
+              "农耕种植 1× Tomato"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "I'll need to make something that'll help it weather the rocky shore.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "Smithing 制作 1× ShipKeelRepair"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "It can't be that hard, can it?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "Crafting 制作 1× ShipSailRepair"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ17",
+    "name": "The Sunken Tower",
+    "name_zh": "沉没之塔",
+    "category": "MelvorBase:Act2",
+    "requirements": [
+      "Quest:Ship Shape(MQ16)"
+    ],
+    "prereq_quests": [
+      "MelvorBase:MQ16"
+    ],
+    "rewards": "300,000 Gold Pieces, 2000× Stardust, 500× Dawnsteel Bar, 400× Lasagna, 100× Sporlyle Herb Seed, 2000× Dawnsteel Arrows, 4000× Decay Rune",
+    "steps": [
+      {
+        "id": "0",
+        "description": "Astrology (Following stars through rocks)",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [
+              "AstrologyMajorNodes≥2"
+            ],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "I think we're doing them a favor.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "击杀 10× Melee Amalgamation",
+              "击杀 10× Ranged Amalgamation",
+              "击杀 10× Magic Amalgamation"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "This feels... right.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "通过 Herblore 获取 1× Potion of Rebirth"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "description": "This is going to be extremely dangerous.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "敏捷完成 1× FleshboundPassage"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [
+              "敏捷完成 1× SinewChasm"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "description": "What happened to you..?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [
+              "击杀 1× Talm"
+            ],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ18",
+    "name": "MQ18",
+    "name_zh": "MQ18",
+    "category": "MelvorBase:MainQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "What can you tell me? (Divination)",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "Bring me back to what you wish to show me. (Divination)",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ19",
+    "name": "MQ19",
+    "name_zh": "MQ19",
+    "category": "MelvorBase:MainQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "Damn him.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "The Dreamers... what can they teach me?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "[Exclusive Content Agility] X/X [Exclusive Content Agility]",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "description": "This 'ought to be good!",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ20",
+    "name": "MQ20",
+    "name_zh": "MQ20",
+    "category": "MelvorBase:MainQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "I've got first watch, I suppose.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "It looks like a whole pack has come out to greet us.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "This is some of the toughest meat I've worked with...",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "description": "It's almost like they don't want people coming up here!",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ21",
+    "name": "MQ21",
+    "name_zh": "MQ21",
+    "category": "MelvorBase:MainQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "It it a pull door..?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "Let's see what this dwarf has got!",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "Don't have much of a choice now, do we?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "description": "Nothing too scary, then?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ22",
+    "name": "MQ22",
+    "name_zh": "MQ22",
+    "category": "MelvorBase:MainQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "I've been working on the Stoneeeeway~",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "Come on... Someone has to be out of place...",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "Oh no...",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ23",
+    "name": "MQ23",
+    "name_zh": "MQ23",
+    "category": "MelvorBase:MainQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "I'll focus on breaking up the bigger rocks.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "Please don't blow up, please don't blow up, please don't blo-",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "They have to pay.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ24",
+    "name": "MQ24",
+    "name_zh": "MQ24",
+    "category": "MelvorBase:MainQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "Her house simply isn't enough. How about a proper cookhouse? Maybe she'll be able to get some help then, too?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "Do we just plant these in the ground or..?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "This feels a little unorthodox.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "description": "A bit of this, and a bit of that...",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ25",
+    "name": "MQ25",
+    "name_zh": "MQ25",
+    "category": "MelvorBase:MainQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "Should come to a point here, maybe a handle made of...",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "I wonder how Flamberian bodies handle stardust...",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "Just... stay still!",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ26",
+    "name": "MQ26",
+    "name_zh": "MQ26",
+    "category": "MelvorBase:MainQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "What's going on up here?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "Who's a good monster?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "I feel soggy and miserable.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "description": "They started it.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "description": "Has to be what we're looking for.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MQ27",
+    "name": "MQ27",
+    "name_zh": "MQ27",
+    "category": "MelvorBase:MainQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "I can't wait to see them in action.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "I just have to reel them in before the shadows do.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "Today, the beast dies.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [],
+            "costs_currencies": [
+              {
+                "currency": "MelvorBase:GoldPieces",
+                "qty": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:SeedsofSustenance",
+    "name": "Seeds of Sustenance",
+    "name_zh": "维持生计的种子",
+    "category": "MelvorBase:SideQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "Only the best for Lira. I'll need to harvest some fresh produce, then hand it over.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "It's a large fireplace, it'll take a lot of wood to fill, and a decent bit of effort to get it all burning.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:PackingLunch",
+    "name": "Packing Lunch",
+    "name_zh": "准备午餐",
+    "category": "MelvorBase:SideQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "What would a man like him even like? Fish, maybe?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "I need to make sure the bolts are well-made so they'll hold a man of that size, only way to do that is to do it myself.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MorallyEthicalGraverobbing",
+    "name": "Morally Ethical Graverobbing",
+    "name_zh": "合乎伦理的盗墓",
+    "category": "MelvorBase:SideQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "Some steel for the heads, and willow logs for the shafts should be plenty strong enough.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "I have the feeling I'm going to be here a while...",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "Morlin really isn't holding back on asking away, is he?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:LifesABeach",
+    "name": "Life's A Beach",
+    "name_zh": "海滩生活",
+    "category": "MelvorBase:SideQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "Maybe I'll reel it in, whatever it is.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "I wonder if I should toss him back..?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "How do people even use these things?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:MageintheMaking",
+    "name": "Mage in the Making",
+    "name_zh": "法师觉醒",
+    "category": "MelvorBase:SideQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "I'm sure nothing could possibly go wrong arming her.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "I never fancied myself a teacher, but let's take a stab at it.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "Maybe she'll be a bit better now?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "description": "Surely... Surely, teaching her to arm herself can't go wrong.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:HarvestFestival",
+    "name": "Harvest Festival",
+    "name_zh": "丰收节",
+    "category": "MelvorBase:SideQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "I'm not too sure how much they'll need... let's get quite a bit.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "I'm going to need you to grow... a bit faster.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "Take one, cook it, pass it on. Take on, cook it, pass it on...",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "description": "I hope these turn out nicely.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:SettingDownRoots",
+    "name": "Setting Down Roots",
+    "name_zh": "落地生根",
+    "category": "MelvorBase:SideQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "I wonder what ever happened to this place?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "I wonder what Clove might find for dinner.  X/X [Steel Arrows] - [Fletching Tab Link]",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "This stuff grows worse than most weeds.  X/X [Ambervine Bush] - [Woodcutting Tab Link]",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "description": "Hopefully Petal hasn't severely poisoned the ground.  X/X  - [Farming Tab Link]",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:AGlitteringTrap",
+    "name": "A Glittering Trap",
+    "name_zh": "闪光的陷阱",
+    "category": "MelvorBase:SideQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "Let's make sure these are sturdy enough to handle... whatever we're fighting.  X/X [Rune Spear] - [Fletching Tab Link]",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "I feel like I'm arming Gol for war, I hope whatever it is goes down quickly.  X/X [Rune Javelin] - [Fletching Tab Link]",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "Let's hope that payout is as good as he claims.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "description": "I'll make this extra messy, so it glows even brighter.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:TheFourSentries",
+    "name": "The Four Sentries",
+    "name_zh": "四位哨兵",
+    "category": "MelvorBase:SideQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "They're asking for stuff without even seeing me, now...",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "I'm sure this is what I need to do.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "At least I know I'm helping her confidence.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "description": "You know, that old man makes a good point...",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MelvorBase:TheSealedGrove",
+    "name": "The Sealed Grove",
+    "name_zh": "被封印的树林",
+    "category": "MelvorBase:SideQuests",
+    "requirements": [],
+    "prereq_quests": [],
+    "rewards": "69 Gold Pieces",
+    "steps": [
+      {
+        "id": "0",
+        "description": "These trees almost grow faster than I can chop them down!",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "description": "Surely Gol will be able to handle... Whatever is in this forest.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "description": "This bait positively reeks, but that's kind of the point.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "description": "Rosemary is normally pretty pleasant. Will it really repel monsters with Petal's solution?",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "description": "The runes the old man is asking for... This barrier seems like some nasty work.",
+        "tasks": [
+          {
+            "id": "0",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:NormalLog",
+                "name": "Normal Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          },
+          {
+            "id": "1",
+            "goals": [],
+            "condition_goals": [],
+            "costs_items": [
+              {
+                "item": "MelvorBase:OakLog",
+                "name": "Oak Log",
+                "qty": 1
+              }
+            ],
+            "costs_currencies": []
+          }
+        ]
+      }
+    ]
+  }
+]
