@@ -4,11 +4,11 @@
 
 # MelvorIdle2-MCP (`Melvor2-MCP`)
 
-> **给 Melvor Idle 2 装上 AI 自主大脑** — 完整 MCP（Model Context Protocol）连接器、全离线知识库提取引擎、内置自主计划队列调度器与可视化监控面板。
+> **给 Melvor Idle 2 装上 AI 自主大脑** — 完整 MCP（Model Context Protocol）连接器、全离线知识库提取引擎、内置自主计划队列调度器与「羊皮手账 / 暗墨黄铜」双主题可视化监控面板。
 >
-> **Release Version**: `V0.0.1-0116a1` · **[前往 Releases 下载压缩包与宣传视频](../../releases/tag/V0.0.1-0116a1)**
-> - **MCP 插件版本**：`V0.0.1`（内置游戏桥接 `v2.1.0`）
-> - **适配游戏版本**：`Melvor Idle 2 v0.11.6-alpha.1`（代号 `0116a1`，Godot 4.7.2 + .NET 10，Steam Early Access Windows x64）
+> **Release Version**: `V0.0.2-0117a` · **[前往 Releases 下载压缩包](../../releases/tag/V0.0.2-0117a)**
+> - **MCP 插件版本**：`V0.0.2`（共 27 个 MCP 工具 · 内置游戏桥接 `v2.2.0`）
+> - **适配游戏版本**：`Melvor Idle 2 v0.11.7-alpha`（代号 `0117a`，Godot 4.7.2 + .NET 10，Steam Early Access Windows x64）
 
 ---
 
@@ -18,10 +18,11 @@
    - 直接解析 `Melvor2.exe` 内嵌 Godot PCK 中的 `MelvorBase.json` 与 `zh_CN.po` / `en_GB.po`，1 秒生成全量游戏知识库：
      - **1,811 件物品**（售价、装备属性、食物回血、工具带、开箱/埋葬）
      - **37 个主线/支线任务**（Act 1/2 前置、步骤目标、提交材料与奖励）
+     - **25 技能专精公会（Mastery Guild）**：3,251 个专精任务与 150 项段位加成 + 42 套装备套装与图鉴/劫案
      - **499 件商店商品**（真实价格、限购与解锁条件）
      - **64 战区 / 14 地下城 / 192 敌人掉落表 / 48 法术 / 41 祷告 / 10 屠魔大师**
      - **25 项全技能配方**与 **519 条跨系统物品流转关系**
-   - 内置 `.NET BrotliStream` 解压器（`SaveDecompress.exe`），游戏关闭时也能完整解析 `.sav` 存档中的技能/XP、仓库、货币、任务进度、装备、工具带、食物与屠魔任务。
+   - 内置 `.NET BrotliStream` 解压器（`SaveDecompress.exe`），游戏关闭时也能完整解析 `.sav` 存档中的技能/XP、仓库、货币、任务进度、**25 技能专精公会进度**、装备、工具带、食物、宠物、生火篝火、敏捷技巧与屠魔任务。
    - 支持中英文双语模糊检索（`search_knowledge`），防止 AI 编造游戏内部 ID。
 
 2. **内置自主计划队列调度器（Autonomous Plan Scheduler）**
@@ -34,9 +35,9 @@
    - 覆盖全部采集/工匠/支援技能、战斗选怪/地下城/吃食/换装/工具带/Loadout/法术/祷告/姿态/屠魔、商店购买、仓库卖货/开箱/埋骨/升级、主支线提交领奖、农耕与牧场一键维护等。
    - 零模拟键鼠点击，原生主线程封送执行，且具备采集防重复 toggle 误关保护。
 
-4. **双模式可视化调度监控面板**
-   - **内置模式（免额外进程）**：游戏运行时直接浏览器打开 `http://127.0.0.1:17817/`。
-   - **独立离线回退模式**：运行 `.\StartDashboard.ps1 -Open`，打开 `http://127.0.0.1:17818/`，游戏关闭时也可离线浏览存档状态与计划队列。
+4. **双模式「羊皮手账 / 暗墨黄铜」双主题可视化调度监控面板**
+   - **内置模式（免额外进程）**：游戏运行时直接浏览器打开 `http://127.0.0.1:17817/`，集成计划队列、专精段位视图与 EA 兼容诊断矩阵。
+   - **独立离线回退模式**：运行 `.\StartDashboard.ps1 -Open`，打开 `http://127.0.0.1:17818/`，游戏关闭时也可离线浏览存档状态、专精进度与计划队列。
 
 5. **专为 Early Access 设计的兼容性自检与熔断保护（`CompatibilityGuard`）**
    - 仅通过轻量 `hostfxr.dll` 包装器挂载，**不修改游戏核心资源**，随时可一键无痕卸载。
@@ -48,12 +49,12 @@
 
 ### 环境要求
 - Windows 10/11 (x64)
-- Steam 版 **Melvor Idle 2**（当前适配 `v0.11.6-alpha.1`）
+- Steam 版 **Melvor Idle 2**（当前适配 `v0.11.7-alpha`）
 - **Python 3.10+**（安装时勾选 *Add python.exe to PATH*）
 - 预编译的桥接 DLL 与存档解压器已随包附带，**普通玩家无需安装 .NET SDK 或 MinGW GCC**。
 
 ### 第一步：解压并运行一键配置脚本
-将压缩包解压到任意目录（例如 `D:\Tools\Melvor2-MCP-V0.0.1-0116a1`），**先关闭游戏**，在该目录打开 PowerShell 运行：
+将压缩包解压到任意目录（例如 `D:\Tools\Melvor2-MCP-V0.0.2-0117a`），**先关闭游戏**，在该目录打开 PowerShell 运行：
 
 ```powershell
 .\Setup.ps1
@@ -81,9 +82,9 @@
 {
   "mcpServers": {
     "melvor-idle-2": {
-      "command": "D:\\Tools\\Melvor2-MCP-V0.0.1-0116a1\\.venv\\Scripts\\python.exe",
+      "command": "D:\\Tools\\Melvor2-MCP-V0.0.2-0117a\\.venv\\Scripts\\python.exe",
       "args": ["-m", "melvor2_mcp"],
-      "cwd": "D:\\Tools\\Melvor2-MCP-V0.0.1-0116a1",
+      "cwd": "D:\\Tools\\Melvor2-MCP-V0.0.2-0117a",
       "env": {
         "MELVOR2_BRIDGE_PORT": "17817"
       }
@@ -112,9 +113,9 @@
 
 ---
 
-## 提供的 MCP 工具一览
+## 提供的 MCP 工具一览（27 个）
 
-- **离线读取（游戏关闭亦可用）**：`get_game_state`、`get_skills`、`get_bank_items`、`get_currencies`、`get_active_actions`、`get_quests`、`get_equipment_and_setup`、`list_saves`
+- **离线读取（游戏关闭亦可用）**：`get_game_state`、`get_skills`、`get_bank_items`、`get_currencies`、`get_active_actions`、`get_quests`、`get_mastery_tasks`、`get_equipment_and_setup`、`list_saves`
 - **自主计划队列**：`validate_plan`、`set_action_plan`、`get_plan_status`、`control_plan`
 - **实时桥接与操控**：`get_bridge_health`、`get_live_state`、`get_live_bank`、`get_live_quests`、`get_live_combat`、`get_live_shop`、`get_live_passive`、`list_available_actions`、`execute_game_op`、`start_action`、`stop_action`
 - **知识库检索**：`browse_knowledge`、`search_knowledge`、`get_quest_guide`
@@ -124,5 +125,5 @@
 ## 卸载与免责声明
 
 - **无痕卸载**：关闭游戏后运行 `.\bridge\UninstallBridge.ps1`（或在 Steam 中对 Melvor Idle 2 执行「验证游戏文件的完整性」），即可完全恢复原始 `hostfxr.dll` 并移除桥接文件。
-- **兼容性提示**：Melvor Idle 2 处于 Early Access 快速迭代期，本发布包版本 `V0.0.1-0116a1` 针对游戏 `v0.11.6-alpha.1` 验证通过。游戏大版本更新后，如面板顶部「EA 兼容检查」提示降级，请查看 `%APPDATA%\Games By Malcs\Melvor Idle 2\logs\melvor2_compat_report.json` 并关注插件后续适配版本。
+- **兼容性提示**：Melvor Idle 2 处于 Early Access 快速迭代期，本发布包版本 `V0.0.2-0117a` 针对游戏 `v0.11.7-alpha` 验证通过。游戏大版本更新后，如面板顶部「EA 兼容诊断」提示降级，请查看 `%APPDATA%\Games By Malcs\Melvor Idle 2\logs\melvor2_compat_report.json` 并关注插件后续适配版本。
 - 本工具仅供单机学习研究与个人辅助体验使用，不附带任何游戏受版权保护的原始资源文件（`MelvorBase.json` 与语言包由脚本从玩家本机合法拥有的 `Melvor2.exe` 本地提取）。

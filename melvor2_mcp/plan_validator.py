@@ -61,6 +61,101 @@ def load_quests_index() -> list[dict]:
 
 
 @lru_cache(maxsize=1)
+def load_mastery_index() -> dict:
+    p = DATA_DIR / "mastery_index.json"
+    if not p.is_file():
+        return {"categories": {}, "skills": {}}
+    return json.loads(p.read_text(encoding="utf-8"))
+
+
+def compute_offline_mastery(save_obj: Any, skill_filter: str | None = None) -> dict:
+    """Combine decoded save MasteryGuild tasks with mastery_index.json.
+
+    Note: Condition-only tasks (e.g. Level/ItemStatistic) are evaluated dynamically
+    by the live game engine and not stored in ActiveGoal; goal-based & trigger-based
+    tasks are persisted directly in the save file and counted here.
+    """
+    idx = load_mastery_index()
+    saved_mg = save_obj.mastery_guild() if hasattr(save_obj, "mastery_guild") else {}
+    skill_levels = {s["id"]: s["level"] for s in (save_obj.skills() if hasattr(save_obj, "skills") else [])}
+    unlocked_pets = {pid for pid, pv in (save_obj.pets() if hasattr(save_obj, "pets") else {}).items() if pv.get("unlocked")}
+
+    needle = skill_filter.strip().lower().split(":")[-1] if skill_filter else None
+    skills_out: dict[str, dict] = {}
+
+    for eid, meta in idx.get("skills", {}).items():
+        sname = meta["skill"]
+        if needle and needle not in sname.lower() and needle not in eid.lower():
+            continue
+        saved_tasks = (saved_mg.get(eid) or {}).get("tasks", {})
+        cur_level = skill_levels.get(eid, 1)
+
+        completed_pts = 0
+        completed_count = 0
+        task_states = []
+        for t in meta.get("tasks", []):
+            tid = t["id"]
+            st = saved_tasks.get(tid) or {}
+            is_done = False
+            prog = float(st.get("progress") or 0.0)
+            if t.get("has_goal"):
+                is_done = bool(st.get("goal_complete"))
+            elif t.get("has_trigger"):
+                is_done = bool(st.get("trigger_met"))
+            elif t.get("has_condition"):
+                # Evaluate simple Level / PetUnlocked conditions offline
+                desc = t.get("description", "")
+                if t.get("goal_type") == "Cond:Level":
+                    import re as _re
+                    m = _re.search(r"Lv\.(\d+)", desc)
+                    if m and cur_level >= int(m.group(1)):
+                        is_done = True
+                elif t.get("goal_type") == "Cond:PetUnlocked":
+                    for pid in unlocked_pets:
+                        if pid.split(":")[-1] in desc:
+                            is_done = True
+                            break
+
+            if is_done:
+                completed_pts += int(t.get("points") or 0)
+                completed_count += 1
+
+            task_states.append({
+                **t,
+                "progress": prog,
+                "completed": is_done,
+            })
+
+        total_pts = int(meta.get("total_points") or 0)
+        ranks = meta.get("ranks") or []
+        cur_rank_idx = 0
+        for ri, r in enumerate(ranks):
+            if completed_pts >= int(r.get("points_required") or 0):
+                cur_rank_idx = ri
+        cur_rank = ranks[cur_rank_idx] if ranks else {"name": "Initiate", "points_required": 0, "bonus": ""}
+        next_rank = ranks[cur_rank_idx + 1] if (cur_rank_idx + 1) < len(ranks) else None
+
+        skills_out[sname] = {
+            "entity": eid,
+            "skill": sname,
+            "rank_number": cur_rank_idx + 1,
+            "rank_name": cur_rank.get("name"),
+            "points": completed_pts,
+            "total_points": total_pts,
+            "percent": round((completed_pts / total_pts) * 100, 1) if total_pts else 0.0,
+            "completed_tasks": completed_count,
+            "total_tasks": len(task_states),
+            "next_rank_name": next_rank.get("name") if next_rank else None,
+            "next_rank_points": next_rank.get("points_required") if next_rank else None,
+            "points_to_next_rank": max(0, int(next_rank["points_required"]) - completed_pts) if next_rank else 0,
+            "next_rank_bonus": next_rank.get("bonus") if next_rank else None,
+            "tasks": task_states,
+        }
+
+    return {"source": "offline_save", "skills": skills_out}
+
+
+@lru_cache(maxsize=1)
 def load_id_sets() -> dict[str, set[str]]:
     """Load valid ID sets from MelvorBase.json for fast plan validation."""
     p = DATA_DIR / "MelvorBase.json"

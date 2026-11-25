@@ -21,6 +21,10 @@ Decoded components (offline-readable even while game is closed):
     - Areas        (Selected combat area / enemy / dungeon & progress)
     - MagicSpells  (Selected spell, imbuement, spellbook)
     - Prayer       (Selected & active prayers per slot)
+    - MasteryGuild (All 25 skills' Mastery Guild task progress & completion)
+    - Pets         (Unlocked pets & unlock goal progress)
+    - Bonfire      (Firemaking active bonfire)
+    - Techniques   (Agility technique XP & levels)
 """
 
 from __future__ import annotations
@@ -261,6 +265,35 @@ class ParsedSave:
         if "Prayer" in ent.components and ent.components["Prayer"].decoded:
             out["prayers"] = ent.components["Prayer"].decoded
         return out
+
+    def mastery_guild(self) -> dict[str, dict]:
+        """Per-skill MasteryGuild raw decoded tasks (keyed by entity id)."""
+        out: dict[str, dict] = {}
+        for eid, ent in self.entities.items():
+            if "MasteryGuild" in ent.components and ent.components["MasteryGuild"].decoded:
+                out[eid] = ent.components["MasteryGuild"].decoded
+        return out
+
+    def pets(self) -> dict[str, dict]:
+        out: dict[str, dict] = {}
+        for ent in self.entities.values():
+            if "Pets" in ent.components and ent.components["Pets"].decoded:
+                out.update(ent.components["Pets"].decoded.get("pets", {}))
+        return out
+
+    def bonfire(self) -> dict:
+        ent = self.entities.get("MelvorBase:Firemaking")
+        if not ent or "Bonfire" not in ent.components:
+            return {}
+        d = ent.components["Bonfire"].decoded
+        return dict(d) if d else {}
+
+    def agility_techniques(self) -> dict[str, dict]:
+        ent = self.entities.get("MelvorBase:Agility")
+        if not ent or "Techniques" not in ent.components:
+            return {}
+        d = ent.components["Techniques"].decoded
+        return dict(d.get("techniques", {})) if d else {}
 
 
 # ---------------------------------------------------------------------------
@@ -531,6 +564,79 @@ def _decode_prayer(r: Reader, _version: int = 0) -> dict:
     return {"slots": slots}
 
 
+def _decode_mastery_guild(r: Reader, _version: int = 0) -> dict:
+    selected_cat = r.string() if r.boolean() else None
+    count = r.int32()
+    tasks: dict[str, dict] = {}
+    for _ in range(count):
+        tid = r.string()
+        tr = r.region()
+        goal_id = None
+        prog = 0.0
+        goal_complete = False
+        goal_active = False
+        if not tr.eof() and tr.boolean():
+            goal_id = tr.string()
+            gr = tr.region()
+            if gr.remaining() >= 8:
+                prog = gr.double()
+            if gr.remaining() >= 1:
+                goal_complete = gr.boolean()
+            if gr.remaining() >= 1:
+                goal_active = gr.boolean()
+        trigger_met = tr.boolean() if not tr.eof() else False
+        tasks[tid] = {
+            "goal_id": goal_id,
+            "progress": prog,
+            "goal_complete": goal_complete,
+            "goal_active": goal_active,
+            "trigger_met": trigger_met,
+        }
+    return {"selected_category": selected_cat, "tasks": tasks}
+
+
+def _decode_pets(r: Reader, _version: int = 0) -> dict:
+    count = r.int32()
+    pets: dict[str, dict] = {}
+    for _ in range(count):
+        pid = r.string()
+        pr = r.region()
+        unlocked = pr.boolean() if not pr.eof() else False
+        prog = 0.0
+        if not pr.eof() and pr.boolean():
+            _gid = pr.string()
+            gr = pr.region()
+            if gr.remaining() >= 8:
+                prog = gr.double()
+        pets[pid] = {"unlocked": unlocked, "progress": prog}
+    return {"pets": pets}
+
+
+def _decode_bonfire(r: Reader, _version: int = 0) -> dict:
+    # Timer.WriteTo: double remaining_ms + bool is_running (9 bytes)
+    remaining_ms = r.double()
+    timer_running = r.boolean()
+    bonfire = r.string() if r.boolean() else None
+    is_active = r.boolean() if not r.eof() else False
+    return {
+        "bonfire": bonfire,
+        "is_active": is_active,
+        "timer_running": timer_running,
+        "remaining_ms": remaining_ms,
+    }
+
+
+def _decode_agility_techniques(r: Reader, _version: int = 0) -> dict:
+    count = r.int32()
+    techs: dict[str, dict] = {}
+    for _ in range(count):
+        tid = r.string()
+        tr = r.region()
+        xp = tr.double() if tr.remaining() >= 8 else 0.0
+        techs[tid] = {"xp": xp, "level": level_from_xp(xp)}
+    return {"techniques": techs}
+
+
 COMPONENT_DECODERS = {
     "Wallet": _decode_wallet,
     "Inventory": _decode_inventory,
@@ -544,6 +650,10 @@ COMPONENT_DECODERS = {
     "Areas": _decode_combat_areas,
     "MagicSpells": _decode_magic_spells,
     "Prayer": _decode_prayer,
+    "MasteryGuild": _decode_mastery_guild,
+    "Pets": _decode_pets,
+    "Bonfire": _decode_bonfire,
+    "Techniques": _decode_agility_techniques,
 }
 
 

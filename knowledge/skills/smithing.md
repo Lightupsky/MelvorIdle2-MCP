@@ -19,8 +19,8 @@
 
 | ID | 名称 | 等级 | 经验 | 间隔(s) | 步骤 | 材料 | 产物 | 需求 |
 |---|---|---|---|---|---|---|---|---|
-| `MelvorBase:AbyssalBar` | Abyssal Bar | 50 | 2500 | 2.0 | 5 | 5× Adamantite Ore, Golden Stardust, Blessed Fragments, Abyssal Fragment | Abyssal Bar |  |
-| `MelvorBase:AbyssalVaultKey` | Abyssal Vault Key | 50 | 2500 | 2.0 | 10 | Abyssal Bar | Abyssal Vault Key | ToolbeltItemEquipped({'Item': 'AbyssalVaultKeyMould', 'Quantity': 1}) |
+| `MelvorBase:AbyssalBar` | Abyssal Bar | 50 | 300 | 2.0 | 5 | 5× Adamantite Ore, Golden Stardust, Blessed Fragments, Abyssal Fragment | Abyssal Bar |  |
+| `MelvorBase:AbyssalVaultKey` | Abyssal Vault Key | 50 | 300 | 2.0 | 10 | Abyssal Bar | Abyssal Vault Key | ToolbeltItemEquipped({'Item': 'AbyssalVaultKeyMould', 'Quantity': 1}) |
 | `MelvorBase:ShipKeelRepair` | Ship Keel Repair | 65 | 2500 | 2.0 | 50 | 100× Ironsteel Spike, 150× Runite Bar, 200× Yew Log, 500× Beeswax | Normal Log (0%) |  |
 
 ## QuestsDungeonBreakout

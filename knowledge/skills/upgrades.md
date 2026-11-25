@@ -1,6 +1,53 @@
-# 物品升级 / 宠物 / 工具带总览
+# 物品升级 / 装备套装 / 宠物 / 图鉴与劫案加成总览
 
-> 物品升级：124 | 宠物：36 | 工具带槽位：175 | Mastery Guild 加成：150
+> 物品升级：124 | 装备套装：42 | 宠物：36 | 狩猎图鉴加成：24 | 偷窃劫案加成：16 | 工具带槽位：175 | Mastery Guild 加成：150
+
+## 装备套装加成（Equipment Set Bonuses）
+
+| ID | 套装名 | 组成件 | 套装效果 |
+|---|---|---|---|
+| `MelvorBase:AirWizard` | Air Wizard | Air Wizard Hat, Air Wizard Robe, Air Wizard Bottoms, Air Wizard Boots | (3件) RunePreservationChance +2.0% |
+| `MelvorBase:AirWizardU` | Air Wizard(u) | Air Wizard Hat (u), Air Wizard Robes (u), Air Wizard Bottoms (u), Air Wizard Boots (u) | (3件) RunePreservationChance +3.0% |
+| `MelvorBase:BloodWizard` | Blood Wizard | Blood Hat, Blood Robe, Blood Bottoms, Blood Boots | (3件) FlatCombatStatValue +0.03 |
+| `MelvorBase:Dawnsteel` | Dawnsteel | Dawnsteel Helmet, Dawnsteel Platebody, Dawnsteel Platelegs, Dawnsteel Boots | (3件) FlatLight +5 |
+| `MelvorBase:DawnsteelCollectable` | Dawnsteel (c) | Dawnsteel Helmet (c), Dawnsteel Platebody (c), Dawnsteel Platelegs (c), Dawnsteel Boots (c) | (3件) FlatLight +8 |
+| `MelvorBase:DawnsteelU` | Dawnsteel (u) | Dawnsteel Helmet (u), Dawnsteel Platebody (u), Dawnsteel Platelegs (u), Dawnsteel Boots (u) | (3件) FlatLight +8 |
+| `MelvorBase:Dragonrune` | Dragonrune | Dragonrune Helmet, Dragonrune Platebody, Dragonrune Platelegs, Dragonrune Boots | (3件) AvoidanceChance +20.0%, PercentDamageTaken -30.0% |
+| `MelvorBase:DrownedWizard` | Drowned Wizard | Drowned Hat, Drowned Robe, Drowned Bottoms, Drowned Boots |  |
+| `MelvorBase:DustWizard` | Dust Wizard | Dust Wizard Hat, Dust Wizard Robe, Dust Wizard Bottoms, Dust Wizard Boots | (3件) RunePreservationChance +3.0%, RunePreservationChance +3.0% |
+| `MelvorBase:DustWizardU` | Dust Wizard(u) | Dust Wizard Hat (u), Dust Wizard Robes (u), Dust Wizard Bottoms (u), Dust Wizard Boots (u) | (3件) RunePreservationChance +4.0%, RunePreservationChance +4.0% |
+| `MelvorBase:EarthWizard` | Earth Wizard | Earth Wizard Hat, Earth Wizard Robe, Earth Wizard Bottoms, Earth Wizard Boots | (3件) RunePreservationChance +2.0% |
+| `MelvorBase:EarthWizardU` | Earth Wizard(u) | Earth Wizard Hat (u), Earth Wizard Robes (u), Earth Wizard Bottoms (u), Earth Wizard Boots (u) | (3件) RunePreservationChance +3.0% |
+| `MelvorBase:ElementalWizard` | Elemental Wizard | Elemental Wizard Hat, Elemental Wizard Robe, Elemental Wizard Bottoms, Elemental Wizard Boots | (3件) FlatRuneCost -1, FlatRuneCost -1, FlatRuneCost -1, FlatRuneCost -1 |
+| `MelvorBase:ElementalWizardU` | Elemental Wizard(u) | Elemental Wizard Hat (u), Elemental Wizard Robes (u), Elemental Wizard Bottoms (u), Elemental Wizard Boots (u) | (3件) RunePreservationChance +2.0%, FlatRuneCost -1, FlatRuneCost -1, FlatRuneCost -1, FlatRuneCost -1 |
+| `MelvorBase:EliteFishingGear` | Elite Fishing Gear | Elite Fishing Hat, Elite Fishing Body, Elite Fishing Pants, Elite Fishing Boots | (3件) IncreasedSpecialProductChance +20.0% |
+| `MelvorBase:EliteMiningGear` | Elite Mining Gear | Elite Mining Hat, Elite Mining Body, Elite Mining Pants, Elite Mining Boots | (3件) DoublingChance +5.0% |
+| `MelvorBase:EliteWoodcuttingGear` | Elite Woodcutting Gear | Elite Woodcutting Hat, Elite Woodcutting Body, Elite Woodcutting Pants, Elite Woodcutting Boots | (3件) InstantCutChance +2.0% |
+| `MelvorBase:FireWizard` | Fire Wizard | Fire Wizard Hat, Fire Wizard Robe, Fire Wizard Bottoms, Fire Wizard Boots | (3件) RunePreservationChance +2.0% |
+| `MelvorBase:FireWizardU` | Fire Wizard(u) | Fire Wizard Hat (u), Fire Wizard Robes (u), Fire Wizard Bottoms (u), Fire Wizard Boots (u) | (3件) RunePreservationChance +3.0% |
+| `MelvorBase:GildedGracefiulSet` | Gilded Gracefiul Set | Gilded Graceful Headwear, Gilded Graceful Body, Gilded Graceful Pants, Gilded Graceful Boots | (3件) PercentInterval -6.0%, PercentDamageTaken -2.0% |
+| `MelvorBase:GildedSwiftSet` | Gilded Swift Set | Gilded Swift Headwear, Gilded Swift Body, Gilded Swift Pants, Gilded Swift Boots | (3件) PercentInterval -4.0%, PercentDamageTaken -1.0% |
+| `MelvorBase:GracefulSet` | Graceful Set | Graceful Headwear, Graceful Body, Graceful Pants, Graceful Boots | (3件) PercentInterval -6.0%, PercentDamageTaken -4.0% |
+| `MelvorBase:IntermediateFishingGear` | Intermediate Fishing Gear | Intermediate Fishing Hat, Intermediate Fishing Body, Intermediate Fishing Pants, Intermediate Fishing Boots | (3件) IncreasedSpecialProductChance +10.0% |
+| `MelvorBase:IntermediateMiningGear` | Intermediate Mining Gear | Intermediate Mining Hat, Intermediate Mining Body, Intermediate Mining Pants, Intermediate Mining Boots | (3件) PercentOnHitItemChance +20.0% |
+| `MelvorBase:IntermediateWoodcuttingGear` | Intermediate Woodcutting Gear | Intermediate Woodcutting Hat, Intermediate Woodcutting Body, Intermediate Woodcutting Pants, Intermediate Woodcutting Boots | (3件) FlatOnCutItemChance +0.0% |
+| `MelvorBase:LavaWizard` | Lava Wizard | Lava Wizard Hat, Lava Wizard Robe, Lava Wizard Bottoms, Lava Wizard Boots | (3件) RunePreservationChance +3.0%, RunePreservationChance +3.0% |
+| `MelvorBase:LavaWizardU` | Lava Wizard(u) | Lava Wizard Hat (u), Lava Wizard Robes (u), Lava Wizard Bottoms (u), Lava Wizard Boots (u) | (3件) RunePreservationChance +4.0%, RunePreservationChance +4.0% |
+| `MelvorBase:LightSet` | Light Set | Light Headwear, Light Body, Light Pants, Light Boots | (3件) PercentInterval -2.0% |
+| `MelvorBase:MeteoriteSet` | Meteorite Set | Meteorite Helmet, Meteorite Boots, Meteorite Platelegs, Meteorite Platebody | (3件) FlatCombatStatValue +45 |
+| `MelvorBase:MistWizard` | Mist Wizard | Mist Wizard Hat, Mist Wizard Robe, Mist Wizard Bottoms, Mist Wizard Boots | (3件) RunePreservationChance +3.0%, RunePreservationChance +3.0% |
+| `MelvorBase:MistWizardU` | Mist Wizard(u) | Mist Wizard Hat (u), Mist Wizard Robes (u), Mist Wizard Bottoms (u), Mist Wizard Boots (u) | (3件) RunePreservationChance +4.0%, RunePreservationChance +4.0% |
+| `MelvorBase:MudWizard` | Mud Wizard | Mud Wizard Hat, Mud Wizard Robe, Mud Wizard Bottoms, Mud Wizard Boots | (3件) RunePreservationChance +3.0%, RunePreservationChance +3.0% |
+| `MelvorBase:MudWizardU` | Mud Wizard(u) | Mud Wizard Hat (u), Mud Wizard Robes (u), Mud Wizard Bottoms (u), Mud Wizard Boots (u) | (3件) RunePreservationChance +4.0%, RunePreservationChance +4.0% |
+| `MelvorBase:RefinedMeteorite` | Refined Meteorite | Refined Meteorite Helmet, Refined Meteorite Platebody, Refined Meteorite Platelegs, Refined Meteorite Boots | (3件) FlatCombatStatValue +60 |
+| `MelvorBase:SmokeWizard` | Smoke Wizard | Smoke Wizard Hat, Smoke Wizard Robe, Smoke Wizard Bottoms, Smoke Wizard Boots | (3件) RunePreservationChance +3.0%, RunePreservationChance +3.0% |
+| `MelvorBase:SmokeWizardU` | Smoke Wizard(u) | Smoke Wizard Hat (u), Smoke Wizard Robes (u), Smoke Wizard Bottoms (u), Smoke Wizard Boots (u) | (3件) RunePreservationChance +4.0%, RunePreservationChance +4.0% |
+| `MelvorBase:SteamWizard` | Steam Wizard | Steam Wizard Hat, Steam Wizard Robe, Steam Wizard Bottoms, Steam Wizard Boots | (3件) RunePreservationChance +3.0%, RunePreservationChance +3.0% |
+| `MelvorBase:SteamWizardU` | Steam Wizard(u) | Steam Wizard Hat (u), Steam Wizard Robes (u), Steam Wizard Bottoms (u), Steam Wizard Boots (u) | (3件) RunePreservationChance +4.0%, RunePreservationChance +4.0% |
+| `MelvorBase:SwiftSet` | Swift Set | Swift Headwear, Swift Body, Swift Pants, Swift Boots | (3件) PercentInterval -4.0%, PercentDamageTaken -2.0% |
+| `MelvorBase:WaterWizard` | Water Wizard | Water Wizard Hat, Water Wizard Robe, Water Wizard Bottoms, Water Wizard Boots | (3件) RunePreservationChance +2.0% |
+| `MelvorBase:WaterWizardU` | Water Wizard(u) | Water Wizard Hat (u), Water Wizard Robes (u), Water Wizard Bottoms (u), Water Wizard Boots (u) | (3件) RunePreservationChance +3.0% |
+| `MelvorBase:Ironsteel` | ironsteel | Ironsteel Helmet, Ironsteel Platebody, Ironsteel Platelegs, Ironsteel Boots | (3件) FlatCombatStatValue +15 |
 
 ## 物品升级（Item Upgrades）
 
@@ -171,3 +218,53 @@
 | `MelvorBase:Jinx` | Jinx |  |
 | `MelvorBase:Pip` | Pip |  |
 | `MelvorBase:Arya` | Arya |  |
+
+## 狩猎图鉴等级加成（Hunting Journal Bonuses）
+
+| ID | 名称 | 加成 |
+|---|---|---|
+| `MelvorBase:Level2` | Level2 |  |
+| `MelvorBase:Level3` | Level3 |  |
+| `MelvorBase:Level4` | Level4 |  |
+| `MelvorBase:Level5` | Level5 |  |
+| `MelvorBase:Level6` | Level6 |  |
+| `MelvorBase:Level7` | Level7 |  |
+| `MelvorBase:Level8` | Level8 |  |
+| `MelvorBase:Level9` | Level9 |  |
+| `MelvorBase:Level10` | Level10 |  |
+| `MelvorBase:Level11` | Level11 |  |
+| `MelvorBase:Level12` | Level12 |  |
+| `MelvorBase:Level13` | Level13 |  |
+| `MelvorBase:Level14` | Level14 |  |
+| `MelvorBase:Level15` | Level15 |  |
+| `MelvorBase:Level16` | Level16 |  |
+| `MelvorBase:Level17` | Level17 |  |
+| `MelvorBase:Level18` | Level18 |  |
+| `MelvorBase:Level19` | Level19 |  |
+| `MelvorBase:Level20` | Level20 |  |
+| `MelvorBase:Level21` | Level21 |  |
+| `MelvorBase:Level22` | Level22 |  |
+| `MelvorBase:Level23` | Level23 |  |
+| `MelvorBase:Level24` | Level24 |  |
+| `MelvorBase:Level25` | Level25 |  |
+
+## 偷窃劫案加成（Thieving Heist Bonuses）
+
+| ID | 名称 | 需求 | 加成 |
+|---|---|---|
+| `MelvorBase:ForbiddenLibrary1` | Forbidden Library 1 | Agility Lv.50 |  |
+| `MelvorBase:ForbiddenLibrary2` | Forbidden Library 2 | AgilityTech:Climbing Lv.20, AgilityTech:Jumping Lv.20 |  |
+| `MelvorBase:ForbiddenLibrary3` | Forbidden Library 3 | ItemStatistic({'Value': 1, 'Statistic': 'BankItemFound', 'Item': 'SilverKeyForbiddenLibrary'}) |  |
+| `MelvorBase:ForbiddenLibrary4` | TestBonus4 | ItemStatistic({'Value': 1, 'Statistic': 'BankItemFound', 'Item': 'GoldKeyForbiddenLibrary'}) |  |
+| `MelvorBase:StolenGoods1` | Stolen Goods 1 | Agility Lv.60 |  |
+| `MelvorBase:StolenGoods2` | Stolen Goods 2 | AgilityTech:Jumping Lv.24, AgilityTech:Evading Lv.24 |  |
+| `MelvorBase:StolenGoods3` | Stolen Goods 3 | ItemStatistic({'Value': 1, 'Statistic': 'BankItemFound', 'Item': 'SilverKeyStolenGoods'}) |  |
+| `MelvorBase:StolenGoods4` | Stolen Goods 4 | ItemStatistic({'Value': 1, 'Statistic': 'BankItemFound', 'Item': 'GoldKeyStolenGoods'}) |  |
+| `MelvorBase:DeepMine1` | Deep Mine 1 | Agility Lv.70 |  |
+| `MelvorBase:DeepMine2` | Deep Mine 2 | AgilityTech:Evading Lv.30, AgilityTech:Balancing Lv.30 |  |
+| `MelvorBase:DeepMine3` | Deep Mine 3 | ItemStatistic({'Value': 1, 'Statistic': 'BankItemFound', 'Item': 'SilverKeyDeepMine'}) |  |
+| `MelvorBase:DeepMine4` | Deep Mine 4 | ItemStatistic({'Value': 1, 'Statistic': 'BankItemFound', 'Item': 'GoldKeyDeepMine'}) |  |
+| `MelvorBase:PalaceVault1` | Palace Vault 1 | Agility Lv.92 |  |
+| `MelvorBase:PalaceVault2` | Palace Vault 2 | AgilityTech:Balancing Lv.36, AgilityTech:Rappelling Lv.36 |  |
+| `MelvorBase:PalaceVault3` | Palace Vault 3 | ItemStatistic({'Value': 1, 'Statistic': 'BankItemFound', 'Item': 'SilverKeyPalaceVault'}) |  |
+| `MelvorBase:PalaceVault4` | Palace Vault 4 | ItemStatistic({'Value': 1, 'Statistic': 'BankItemFound', 'Item': 'GoldKeyPalaceVault'}) |  |

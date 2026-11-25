@@ -15,7 +15,6 @@
 | `MelvorBase:FireflyNooseWand` | Firefly Noose Wand | 45 | 48 | 3.0 | 4 | 15× Firefly, 15× Nightreed Braid, Maple Log | Firefly Noose Wand |  |
 | `MelvorBase:DragonboneOffhandGlaive` | Dragonbone Offhand Glaive | 53 | 121 | 3.0 | 8 | 2× Small Dragon Bone, 2× Runite Bar | Dragonbone Offhand Glaive |  |
 | `MelvorBase:StripedFurBoots` | Striped Fur Boots | 62 | 178 | 3.0 | 9 | 2× Rabbit Fur, 6× Striped Hyena Leather | Striped Fur Boots |  |
-| `MelvorBase:StripedCape` | Striped Cape | 67 | 234 | 3.0 | 10 | 12× Striped Hyena Leather | Striped Cape |  |
 | `MelvorBase:PhantomShield` | Phantom Shield | 73 | 216 | 3.0 | 9 | 5× Phantom Veil | Phantom Shield |  |
 | `MelvorBase:CaribouAntlerHelmet` | Caribou Antler Helmet | 80 | 261 | 3.0 | 9 | 8× Caribou Antler, 2× Dragonite Bar | Caribou Antler Helmet |  |
 | `MelvorBase:ScabjawBeastGauntlets` | Scabjaw Beast Gauntlets | 82 | 338 | 3.0 | 12 | 5× Scabjaw Beast Horn, 2× Dragonite Bar | Scabjaw Beast Gauntlets |  |
@@ -267,6 +266,7 @@
 | `MelvorBase:GreenToadskinShield` | Green Toadskin Shield | 40 | 42 | 3.0 | 4 | 2× Green Toadskin | Green Toadskin Shield |  |
 | `MelvorBase:GreenDragonscaleShield` | Green Dragonscale Shield | 46 | 108 | 3.0 | 9 | Small Green Dragonscale, 2× Adamantite Bar | Green Dragonscale Shield |  |
 | `MelvorBase:BlueDragonscaleShield` | Blue Dragonscale Shield | 56 | 156 | 3.0 | 9 | 3× Small Blue Dragonscale, 2× Runite Bar | Blue Dragonscale Shield |  |
+| `MelvorBase:StripedCape` | Striped Cape | 67 | 234 | 3.0 | 10 | 12× Striped Hyena Leather | Striped Cape |  |
 | `MelvorBase:RedDragonscaleShield` | Red Dragonscale Shield | 75 | 227 | 3.0 | 9 | 3× Small Red Dragonscale, 2× Dawnsteel Bar | Red Dragonscale Shield |  |
 | `MelvorBase:BlackDragonscaleShield` | Black Dragonscale Shield | 85 | 324 | 3.0 | 11 | 4× Small Black Dragonscale, 2× Dragonite Bar | Black Dragonscale Shield |  |
 

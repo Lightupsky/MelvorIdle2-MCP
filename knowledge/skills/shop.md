@@ -40,66 +40,116 @@
 |---|---|---|---|---|---|
 | `MelvorBase:ArenaEntryTicket` | Arena Entry Ticket | 750 Gold Pieces | ∞ | Arena Entry Ticket | Agility Lv.20 |
 
-## Mark's Marks (`AgilityMarkShop`)
+## Agility Cheat Sheets (`AgilityMarkAgility`)
 
 | ID | 名称 | 价格 | 限购 | 获得物品/加成 | 购买条件 |
 |---|---|---|---|---|---|
 | `MelvorBase:ClimbingCheatSheet` | Climbing Cheat Sheet | 40× Agility Mark | ∞ | 1000× Climbing Cheat Sheet | Agility Lv.5 |
+| `MelvorBase:JumpingCheatSheet` | Jumping Cheat Sheet | 90× Agility Mark | ∞ | 1000× Jumping Cheat Sheet | Agility Lv.10 |
+| `MelvorBase:EvadingCheatSheet` | Evading Cheat Sheet | 135× Agility Mark | ∞ | 1000× Evading Cheat Sheet | Agility Lv.25 |
+| `MelvorBase:BalancingCheatSheet` | Balancing Cheat Sheet | 175× Agility Mark | ∞ | 1000× Balancing Cheat Sheet | Agility Lv.55 |
+| `MelvorBase:RappellingCheatSheet` | Rappelling Cheat Sheet | 200× Agility Mark | ∞ | 1000× Rappelling Cheat Sheet | Agility Lv.70 |
+
+## Beastcrafting Gear (`AgilityMarkBeastcrafting`)
+
+| ID | 名称 | 价格 | 限购 | 获得物品/加成 | 购买条件 |
+|---|---|---|---|---|---|
+| `MelvorBase:BeastcraftingGlovesI` | Beastcrafting Gloves I | 300× Agility Mark | ∞ | Beastcrafting Gloves I | Beastcrafting Lv.40 |
+| `MelvorBase:BeastcraftingGlovesII` | Beastcrafting Gloves II | 6000× Agility Mark | ∞ | Beastcrafting Gloves II | Beastcrafting Lv.80 |
+
+## Combat Charms (`AgilityMarkCombat`)
+
+| ID | 名称 | 价格 | 限购 | 获得物品/加成 | 购买条件 |
+|---|---|---|---|---|---|
 | `MelvorBase:MagicEvasionCharm` | Magic Evasion Charm | 25× Agility Mark | ∞ | 1000× Magic Evasion Charm | Agility Lv.5 |
 | `MelvorBase:MeleeEvasionCharm` | Melee Evasion Charm | 25× Agility Mark | ∞ | 1000× Melee Evasion Charm | Agility Lv.5 |
 | `MelvorBase:RangedEvasionCharm` | Ranged Evasion Charm | 25× Agility Mark | ∞ | 1000× Ranged Evasion Charm | Agility Lv.5 |
-| `MelvorBase:JumpingCheatSheet` | Jumping Cheat Sheet | 90× Agility Mark | ∞ | 1000× Jumping Cheat Sheet | Agility Lv.10 |
 | `MelvorBase:MagicAccuracyCharm` | Magic Accuracy Charm | 35× Agility Mark | ∞ | 1000× Magic Accuracy Charm | Agility Lv.10 |
 | `MelvorBase:MeleeAccuracyCharm` | Melee Accuracy Charm | 35× Agility Mark | ∞ | 1000× Melee Accuracy Charm | Agility Lv.10 |
 | `MelvorBase:RangedAccuracyCharm` | Ranged Accuracy Charm | 35× Agility Mark | ∞ | 1000× Ranged Accuracy Charm | Agility Lv.10 |
 | `MelvorBase:ProtectionCharm` | Protection Charm | 50× Agility Mark | ∞ | 1000× Protection Charm | Agility Lv.20 |
-| `MelvorBase:EvadingCheatSheet` | Evading Cheat Sheet | 135× Agility Mark | ∞ | 1000× Evading Cheat Sheet | Agility Lv.25 |
+
+## Crafting Gear (`AgilityMarkCrafting`)
+
+| ID | 名称 | 价格 | 限购 | 获得物品/加成 | 购买条件 |
+|---|---|---|---|---|---|
+| `MelvorBase:CraftingGlovesI` | Crafting Gloves I | 300× Agility Mark | ∞ | Crafting Gloves I | Crafting Lv.40 |
+| `MelvorBase:CraftingGlovesII` | Crafting Gloves II | 6000× Agility Mark | ∞ | Crafting Gloves II | Crafting Lv.80 |
+
+## Fishing Gear (`AgilityMarkFishing`)
+
+| ID | 名称 | 价格 | 限购 | 获得物品/加成 | 购买条件 |
+|---|---|---|---|---|---|
 | `MelvorBase:NoviceFishingBody` | Novice Fishing Body | 50× Agility Mark | ∞ | Novice Fishing Body | Fishing Lv.30 |
 | `MelvorBase:NoviceFishingBoots` | Novice Fishing Boots | 50× Agility Mark | ∞ | Novice Fishing Boots | Fishing Lv.30 |
 | `MelvorBase:NoviceFishingHat` | Novice Fishing Hat | 50× Agility Mark | ∞ | Novice Fishing Hat | Fishing Lv.30 |
 | `MelvorBase:NoviceFishingPants` | Novice Fishing Pants | 50× Agility Mark | ∞ | Novice Fishing Pants | Fishing Lv.30 |
-| `MelvorBase:NoviceMiningBody` | Novice Mining Body | 50× Agility Mark | ∞ | Novice Mining Body | Mining Lv.30 |
-| `MelvorBase:NoviceMiningBoots` | Novice Mining Boots | 50× Agility Mark | ∞ | Novice Mining Boots | Mining Lv.30 |
-| `MelvorBase:NoviceMiningHat` | Novice Mining Hat | 50× Agility Mark | ∞ | Novice Mining Hat | Mining Lv.30 |
-| `MelvorBase:NoviceMiningPants` | Novice Mining Pants | 50× Agility Mark | ∞ | Novice Mining Pants | Mining Lv.30 |
-| `MelvorBase:NoviceWoodcuttingBody` | Novice Woodcutting Body | 50× Agility Mark | ∞ | Novice Woodcutting Body | Woodcutting Lv.30 |
-| `MelvorBase:NoviceWoodcuttingBoots` | Novice Woodcutting Boots | 50× Agility Mark | ∞ | Novice Woodcutting Boots | Woodcutting Lv.30 |
-| `MelvorBase:NoviceWoodcuttingHat` | Novice Woodcutting Hat | 50× Agility Mark | ∞ | Novice Woodcutting Hat | Woodcutting Lv.30 |
-| `MelvorBase:NoviceWoodcuttingPants` | Novice Woodcutting Pants | 50× Agility Mark | ∞ | Novice Woodcutting Pants | Woodcutting Lv.30 |
-| `MelvorBase:BeastcraftingGlovesI` | Beastcrafting Gloves I | 300× Agility Mark | ∞ | Beastcrafting Gloves I | Beastcrafting Lv.40 |
-| `MelvorBase:CraftingGlovesI` | Crafting Gloves I | 300× Agility Mark | ∞ | Crafting Gloves I | Crafting Lv.40 |
-| `MelvorBase:FletchingGlovesI` | Fletching Gloves I | 300× Agility Mark | ∞ | Fletching Gloves I | Fletching Lv.40 |
-| `MelvorBase:HerbloreGlovesI` | Herblore Gloves I | 300× Agility Mark | ∞ | Herblore Gloves I | Herblore Lv.40 |
-| `MelvorBase:RunecraftingGlovesI` | Runecrafting Gloves I | 300× Agility Mark | ∞ | Runecrafting Gloves I | Runecrafting Lv.40 |
-| `MelvorBase:SmithingGlovesI` | Smithing Gloves I | 300× Agility Mark | ∞ | Smithing Gloves I | Smithing Lv.40 |
-| `MelvorBase:BalancingCheatSheet` | Balancing Cheat Sheet | 175× Agility Mark | ∞ | 1000× Balancing Cheat Sheet | Agility Lv.55 |
 | `MelvorBase:IntermediateFishingBody` | Intermediate Fishing Body | 350× Agility Mark | ∞ | Intermediate Fishing Body | Fishing Lv.60 |
 | `MelvorBase:IntermediateFishingBoots` | Intermediate Fishing Boots | 350× Agility Mark | ∞ | Intermediate Fishing Boots | Fishing Lv.60 |
 | `MelvorBase:IntermediateFishingHat` | Intermediate Fishing Hat | 350× Agility Mark | ∞ | Intermediate Fishing Hat | Fishing Lv.60 |
 | `MelvorBase:IntermediateFishingPants` | Intermediate Fishing Pants | 350× Agility Mark | ∞ | Intermediate Fishing Pants | Fishing Lv.60 |
-| `MelvorBase:IntermediateMiningBody` | Intermediate Mining Body | 350× Agility Mark | ∞ | Intermediate Mining Body | Mining Lv.60 |
-| `MelvorBase:IntermediateMiningBoots` | Intermediate Mining Boots | 350× Agility Mark | ∞ | Intermediate Mining Boots | Mining Lv.60 |
-| `MelvorBase:IntermediateMiningHat` | Intermediate Mining Hat | 350× Agility Mark | ∞ | Intermediate Mining Hat | Mining Lv.60 |
-| `MelvorBase:IntermediateMiningPants` | Intermediate Mining Pants | 350× Agility Mark | ∞ | Intermediate Mining Pants | Mining Lv.60 |
-| `MelvorBase:IntermediateWoodcuttingBody` | Intermediate Woodcutting Body | 350× Agility Mark | ∞ | Intermediate Woodcutting Body | Woodcutting Lv.60 |
-| `MelvorBase:IntermediateWoodcuttingBoots` | Intermediate Woodcutting Boots | 350× Agility Mark | ∞ | Intermediate Woodcutting Boots | Woodcutting Lv.60 |
-| `MelvorBase:IntermediateWoodcuttingHat` | Intermediate Woodcutting Hat | 350× Agility Mark | ∞ | Intermediate Woodcutting Hat | Woodcutting Lv.60 |
-| `MelvorBase:IntermediateWoodcuttingPants` | Intermediate Woodcutting Pants | 350× Agility Mark | ∞ | Intermediate Woodcutting Pants | Woodcutting Lv.60 |
-| `MelvorBase:RappellingCheatSheet` | Rappelling Cheat Sheet | 200× Agility Mark | ∞ | 1000× Rappelling Cheat Sheet | Agility Lv.70 |
-| `MelvorBase:BeastcraftingGlovesII` | Beastcrafting Gloves II | 6000× Agility Mark | ∞ | Beastcrafting Gloves II | Beastcrafting Lv.80 |
-| `MelvorBase:CraftingGlovesII` | Crafting Gloves II | 6000× Agility Mark | ∞ | Crafting Gloves II | Crafting Lv.80 |
-| `MelvorBase:FletchingGlovesII` | Fletching Gloves II | 6000× Agility Mark | ∞ | Fletching Gloves II | Fletching Lv.80 |
-| `MelvorBase:HerbloreGlovesII` | Herblore Gloves II | 6000× Agility Mark | ∞ | Herblore Gloves II | Herblore Lv.80 |
-| `MelvorBase:RunecraftingGlovesII` | Runecrafting Gloves II | 6000× Agility Mark | ∞ | Runecrafting Gloves II | Runecrafting Lv.80 |
-| `MelvorBase:SmithingGlovesII` | Smithing Gloves II | 6000× Agility Mark | ∞ | Smithing Gloves II | Smithing Lv.80 |
 | `MelvorBase:EliteFishingBody` | Elite Fishing Body | 7000× Agility Mark | ∞ | Elite Fishing Body | Fishing Lv.90 |
 | `MelvorBase:EliteFishingBoots` | Elite Fishing Boots | 7000× Agility Mark | ∞ | Elite Fishing Boots | Fishing Lv.90 |
 | `MelvorBase:EliteFishingHat` | Elite Fishing Hat | 7000× Agility Mark | ∞ | Elite Fishing Hat | Fishing Lv.90 |
 | `MelvorBase:EliteFishingPants` | Elite Fishing Pants | 7000× Agility Mark | ∞ | Elite Fishing Pants | Fishing Lv.90 |
+
+## Fletching Gear (`AgilityMarkFletching`)
+
+| ID | 名称 | 价格 | 限购 | 获得物品/加成 | 购买条件 |
+|---|---|---|---|---|---|
+| `MelvorBase:FletchingGlovesI` | Fletching Gloves I | 300× Agility Mark | ∞ | Fletching Gloves I | Fletching Lv.40 |
+| `MelvorBase:FletchingGlovesII` | Fletching Gloves II | 6000× Agility Mark | ∞ | Fletching Gloves II | Fletching Lv.80 |
+
+## Herblore Gear (`AgilityMarkHerblore`)
+
+| ID | 名称 | 价格 | 限购 | 获得物品/加成 | 购买条件 |
+|---|---|---|---|---|---|
+| `MelvorBase:HerbloreGlovesI` | Herblore Gloves I | 300× Agility Mark | ∞ | Herblore Gloves I | Herblore Lv.40 |
+| `MelvorBase:HerbloreGlovesII` | Herblore Gloves II | 6000× Agility Mark | ∞ | Herblore Gloves II | Herblore Lv.80 |
+
+## Mining Gear (`AgilityMarkMining`)
+
+| ID | 名称 | 价格 | 限购 | 获得物品/加成 | 购买条件 |
+|---|---|---|---|---|---|
+| `MelvorBase:NoviceMiningBody` | Novice Mining Body | 50× Agility Mark | ∞ | Novice Mining Body | Mining Lv.30 |
+| `MelvorBase:NoviceMiningBoots` | Novice Mining Boots | 50× Agility Mark | ∞ | Novice Mining Boots | Mining Lv.30 |
+| `MelvorBase:NoviceMiningHat` | Novice Mining Hat | 50× Agility Mark | ∞ | Novice Mining Hat | Mining Lv.30 |
+| `MelvorBase:NoviceMiningPants` | Novice Mining Pants | 50× Agility Mark | ∞ | Novice Mining Pants | Mining Lv.30 |
+| `MelvorBase:IntermediateMiningBody` | Intermediate Mining Body | 350× Agility Mark | ∞ | Intermediate Mining Body | Mining Lv.60 |
+| `MelvorBase:IntermediateMiningBoots` | Intermediate Mining Boots | 350× Agility Mark | ∞ | Intermediate Mining Boots | Mining Lv.60 |
+| `MelvorBase:IntermediateMiningHat` | Intermediate Mining Hat | 350× Agility Mark | ∞ | Intermediate Mining Hat | Mining Lv.60 |
+| `MelvorBase:IntermediateMiningPants` | Intermediate Mining Pants | 350× Agility Mark | ∞ | Intermediate Mining Pants | Mining Lv.60 |
 | `MelvorBase:EliteMiningBody` | Elite Mining Body | 7000× Agility Mark | ∞ | Elite Mining Body | Mining Lv.90 |
 | `MelvorBase:EliteMiningBoots` | Elite Mining Boots | 7000× Agility Mark | ∞ | Elite Mining Boots | Mining Lv.90 |
 | `MelvorBase:EliteMiningHat` | Elite Mining Hat | 7000× Agility Mark | ∞ | Elite Mining Hat | Mining Lv.90 |
 | `MelvorBase:EliteMiningPants` | Elite Mining Pants | 7000× Agility Mark | ∞ | Elite Mining Pants | Mining Lv.90 |
+
+## Runecrafting Gear (`AgilityMarkRunecrafting`)
+
+| ID | 名称 | 价格 | 限购 | 获得物品/加成 | 购买条件 |
+|---|---|---|---|---|---|
+| `MelvorBase:RunecraftingGlovesI` | Runecrafting Gloves I | 300× Agility Mark | ∞ | Runecrafting Gloves I | Runecrafting Lv.40 |
+| `MelvorBase:RunecraftingGlovesII` | Runecrafting Gloves II | 6000× Agility Mark | ∞ | Runecrafting Gloves II | Runecrafting Lv.80 |
+
+## Smithing Gear (`AgilityMarkSmithing`)
+
+| ID | 名称 | 价格 | 限购 | 获得物品/加成 | 购买条件 |
+|---|---|---|---|---|---|
+| `MelvorBase:SmithingGlovesI` | Smithing Gloves I | 300× Agility Mark | ∞ | Smithing Gloves I | Smithing Lv.40 |
+| `MelvorBase:SmithingGlovesII` | Smithing Gloves II | 6000× Agility Mark | ∞ | Smithing Gloves II | Smithing Lv.80 |
+
+## Woodcutting Gear (`AgilityMarkWoodcutting`)
+
+| ID | 名称 | 价格 | 限购 | 获得物品/加成 | 购买条件 |
+|---|---|---|---|---|---|
+| `MelvorBase:NoviceWoodcuttingBody` | Novice Woodcutting Body | 50× Agility Mark | ∞ | Novice Woodcutting Body | Woodcutting Lv.30 |
+| `MelvorBase:NoviceWoodcuttingBoots` | Novice Woodcutting Boots | 50× Agility Mark | ∞ | Novice Woodcutting Boots | Woodcutting Lv.30 |
+| `MelvorBase:NoviceWoodcuttingHat` | Novice Woodcutting Hat | 50× Agility Mark | ∞ | Novice Woodcutting Hat | Woodcutting Lv.30 |
+| `MelvorBase:NoviceWoodcuttingPants` | Novice Woodcutting Pants | 50× Agility Mark | ∞ | Novice Woodcutting Pants | Woodcutting Lv.30 |
+| `MelvorBase:IntermediateWoodcuttingBody` | Intermediate Woodcutting Body | 350× Agility Mark | ∞ | Intermediate Woodcutting Body | Woodcutting Lv.60 |
+| `MelvorBase:IntermediateWoodcuttingBoots` | Intermediate Woodcutting Boots | 350× Agility Mark | ∞ | Intermediate Woodcutting Boots | Woodcutting Lv.60 |
+| `MelvorBase:IntermediateWoodcuttingHat` | Intermediate Woodcutting Hat | 350× Agility Mark | ∞ | Intermediate Woodcutting Hat | Woodcutting Lv.60 |
+| `MelvorBase:IntermediateWoodcuttingPants` | Intermediate Woodcutting Pants | 350× Agility Mark | ∞ | Intermediate Woodcutting Pants | Woodcutting Lv.60 |
 | `MelvorBase:EliteWoodcuttingBody` | Elite Woodcutting Body | 7000× Agility Mark | ∞ | Elite Woodcutting Body | Woodcutting Lv.90 |
 | `MelvorBase:EliteWoodcuttingBoots` | Elite Woodcutting Boots | 7000× Agility Mark | ∞ | Elite Woodcutting Boots | Woodcutting Lv.90 |
 | `MelvorBase:EliteWoodcuttingHat` | Elite Woodcutting Hat | 7000× Agility Mark | ∞ | Elite Woodcutting Hat | Woodcutting Lv.90 |

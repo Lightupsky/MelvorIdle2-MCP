@@ -23,6 +23,7 @@ import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
+from .plan_validator import compute_offline_mastery
 from .save_io import active_save, load_save
 
 HERE = Path(__file__).resolve().parent
@@ -71,14 +72,36 @@ def _offline_state() -> dict:
     s = load_save(p)
     h = s.header
     q = s.quests()
+    mg = compute_offline_mastery(s).get("skills", {})
+    q_map = q.get("quests", {})
+    active_ids = [qid for qid, qv in q_map.items() if qv.get("state") == "InProgress"]
+    claim_ids = [qid for qid, qv in q_map.items() if qv.get("state") == "Completed"]
+    q_summary = dict(q.get("summary", {}))
+    q_summary["active_ids"] = active_ids
+    q_summary["claimable_ids"] = claim_ids
+    skills_dict = {}
+    for sk in s.skills():
+        sname = sk["id"].split(":")[-1]
+        m = mg.get(sname) or {}
+        skills_dict[sname] = {
+            "level": sk["level"],
+            "xp": int(sk["xp"]),
+            "mastery_rank": m.get("rank_number", 1),
+            "mastery_rank_name": m.get("rank_name"),
+            "mastery_points": m.get("points", 0),
+            "mastery_total": m.get("total_points", 0),
+            "mastery_pct": m.get("percent", 0.0),
+            "to_next_rank": m.get("points_to_next_rank", 0),
+            "next_rank_bonus": m.get("next_rank_bonus"),
+        }
     return {
         "character": h.character_name,
         "total_level": h.total_level,
         "gold_pieces": h.gp,
         "currencies": s.currencies(),
         "active": {"entity": h.active_entity_name, "action": h.active_action_name},
-        "skills": {sk["id"].split(":")[-1]: {"level": sk["level"], "xp": int(sk["xp"])} for sk in s.skills()},
-        "quests_summary": q.get("summary", {}),
+        "skills": skills_dict,
+        "quests_summary": q_summary,
         "offline_fallback": True,
     }
 

@@ -28,6 +28,8 @@ from fastmcp import FastMCP
 from .plan_validator import (
     KNOWLEDGE_DIR,
     KNOWN_OPS,
+    compute_offline_mastery,
+    load_mastery_index,
     load_quests_index,
     search_knowledge_data,
     validate_plan_dict,
@@ -272,17 +274,114 @@ def get_equipment_and_setup() -> str:
     purchased shop upgrade count from the save file (works offline!)."""
     save, _, _ = _get_save()
     shop = save.shop_purchases()
+    pets_raw = save.pets()
+    unlocked_pets = sorted(k for k, v in pets_raw.items() if v.get("unlocked"))
     return json.dumps(
         {
             "combat": save.combat_setup(),
             "toolbelts": save.toolbelts(),
             "slayer": save.slayer_tasks(),
+            "bonfire": save.bonfire(),
+            "agility_techniques": save.agility_techniques(),
+            "pets_unlocked_count": len(unlocked_pets),
+            "pets_unlocked": unlocked_pets,
             "shop_purchased_count": len(shop),
             "shop_purchased": shop,
         },
         ensure_ascii=False,
         indent=2,
     )
+
+
+@mcp.tool()
+def get_mastery_tasks(
+    skill: str | None = None,
+    only_incomplete: bool = True,
+    max_category: str | None = "Easy",
+    limit: int = 30,
+) -> str:
+    """Inspect Skill Mastery Guild ranks, permanent rank bonuses, and actionable
+    Mastery Guild tasks across all 25 skills (live from bridge when running, or
+    offline from the save file!).
+
+    Use this before planning long grinds: finishing a few Novice/Easy tasks
+    quickly unlocks Rank 2 (+10% permanent XP) or Rank 3 efficiency bonuses!
+
+    skill: optional skill name (e.g. 'Mining', 'Cooking', 'Woodcutting').
+           Omit to get a 25-skill Mastery Rank summary table.
+    only_incomplete: if True (default), list unfinished tasks first.
+    max_category: filter task list up to difficulty ('Novice', 'Easy', 'Adept',
+                  'Intermediate', 'Hard', 'Expert', or None for all).
+    limit: max tasks returned when filtering a skill (default 30)."""
+    if _bridge_available():
+        qs = f"?skill={urllib.parse.quote(skill)}" if skill else ""
+        raw = _bridge_call("/mastery" + qs)
+        if "unknown path" not in raw and '"error"' not in raw[:60]:
+            try:
+                live = json.loads(raw)
+                if not skill:
+                    return json.dumps(live, ensure_ascii=False, indent=2)
+                # Enrich live task entries with offline descriptions if needed
+                idx = load_mastery_index().get("skills", {})
+                cat_ord = {"novice": 0, "easy": 1, "adept": 2, "intermediate": 3, "hard": 4, "expert": 5}
+                max_ord = cat_ord.get(max_category.strip().lower(), 99) if max_category else 99
+                for sk_data in (live.get("skills") or {}).values():
+                    meta = idx.get(sk_data.get("entity", ""), {})
+                    desc_map = {t["id"]: t for t in meta.get("tasks", [])}
+                    tasks = sk_data.get("tasks") or []
+                    filtered = []
+                    for t in tasks:
+                        if only_incomplete and t.get("completed"):
+                            continue
+                        tmeta = desc_map.get(t.get("id", ""), {})
+                        cat = (t.get("category") or tmeta.get("category") or "").split(":")[-1]
+                        if cat_ord.get(cat.lower(), 99) > max_ord:
+                            continue
+                        filtered.append({
+                            **t,
+                            "category": cat,
+                            "points": tmeta.get("points", t.get("points")),
+                            "description": tmeta.get("description", t.get("id")),
+                        })
+                    filtered.sort(key=lambda x: (cat_ord.get((x.get("category") or "").lower(), 99), x.get("max_progress") or 0))
+                    sk_data["tasks"] = filtered[:limit]
+                return json.dumps(live, ensure_ascii=False, indent=2)
+            except Exception:
+                pass
+
+    save, _, _ = _get_save()
+    res = compute_offline_mastery(save, skill_filter=skill)
+    if not skill:
+        # Compact 25-skill overview sorted by closest to next rank
+        summary = []
+        for sname, sdata in sorted(res["skills"].items()):
+            summary.append({
+                "skill": sname,
+                "rank": f"R{sdata['rank_number']} {sdata['rank_name']}",
+                "points": f"{sdata['points']}/{sdata['total_points']} ({sdata['percent']}%)",
+                "completed_tasks": f"{sdata['completed_tasks']}/{sdata['total_tasks']}",
+                "to_next_rank": sdata["points_to_next_rank"],
+                "next_rank_bonus": sdata["next_rank_bonus"],
+            })
+        return json.dumps(
+            {
+                "source": "offline_save",
+                "note": "Offline calculation counts goal/trigger/level/pet tasks; pass skill='Mining' etc. to list actionable tasks.",
+                "skills": summary,
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+
+    cat_ord = {"novice": 0, "easy": 1, "adept": 2, "intermediate": 3, "hard": 4, "expert": 5}
+    max_ord = cat_ord.get(max_category.strip().lower(), 99) if max_category else 99
+    for sdata in res["skills"].values():
+        tasks = sdata["tasks"]
+        if only_incomplete:
+            tasks = [t for t in tasks if not t["completed"]]
+        tasks = [t for t in tasks if cat_ord.get(t["category"].lower(), 99) <= max_ord]
+        sdata["tasks"] = tasks[:limit]
+    return json.dumps(res, ensure_ascii=False, indent=2)
 
 
 @mcp.tool()
@@ -597,6 +696,7 @@ _KNOWLEDGE_DOCS = {
     "readme": "README.md",
     "index": "README.md",
     "quests": "quests.md",
+    "mastery": "mastery.md",
     "mechanics": "mechanics.md",
     "planning": "planning.md",
     "interlinks": "interlinks.md",
@@ -606,9 +706,10 @@ _KNOWLEDGE_DOCS = {
 @mcp.tool()
 def browse_knowledge(topic: str) -> str:
     """Browse the offline-extracted Melvor Idle 2 knowledge base.
-    Topics: 'readme', 'quests' (all 37 quests), 'mechanics', 'planning',
-    'interlinks', or 'skills:<name>' (e.g. 'skills:mining', 'skills:smithing',
-    'skills:shop', 'skills:combat', 'skills:upgrades', 'skills:farming')."""
+    Topics: 'readme', 'quests' (all 37 quests), 'mastery' (25 skills Mastery
+    Guild ranks/bonuses/quick tasks), 'mechanics', 'planning', 'interlinks',
+    or 'skills:<name>' (e.g. 'skills:mining', 'skills:smithing', 'skills:shop',
+    'skills:combat', 'skills:upgrades', 'skills:farming')."""
     t = topic.strip().lower()
     if t in _KNOWLEDGE_DOCS:
         path = KNOWLEDGE_DIR / _KNOWLEDGE_DOCS[t]

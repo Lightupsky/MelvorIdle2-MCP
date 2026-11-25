@@ -321,7 +321,47 @@ class GameDB:
             return f"敏捷完成 {mx}× {short_id(d.get('Course'))}"
         if gtype == "AstrologyObserveEvent":
             return f"占星观测 {mx}× {short_id(d.get('Constellation') or d.get('Event') or '事件')}"
+        if gtype == "CookRecipe":
+            return f"烹饪 {mx}× {short_id(d.get('Recipe'))}"
+        if gtype == "FarmingHarvestRecipe":
+            return f"农耕收获 {mx}× {short_id(d.get('Recipe'))}"
+        if gtype == "ActionGainItemValue":
+            ent = short_id((d.get("Component") or {}).get("Entity"))
+            return f"{ent} 产出总价值 ≥ {int(mx):,} GP"
+        if gtype == "CombatDamageEnemy":
+            return f"造成总伤害 {int(mx):,}"
+        if gtype == "CombatEvadeAttacks":
+            return f"闪避攻击 {int(mx):,} 次"
+        if gtype == "CombatSingleHitDamage":
+            return f"单次命中伤害 ≥ {int(mx):,}"
+        if gtype == "CombatHealFromAutoEat":
+            return f"自动进食回复 {int(mx):,}"
+        if gtype == "ArtisanPreserveItem":
+            ent = short_id((d.get("Component") or {}).get("Entity"))
+            return f"{ent} 触发材料保留 {int(mx):,} 次"
+        if gtype == "ArtisanSkipStep":
+            ent = short_id((d.get("Component") or {}).get("Entity"))
+            return f"{ent} 跳过步骤 {int(mx):,} 次"
+        if gtype == "ArtisanCompleteStep":
+            ent = short_id((d.get("Component") or {}).get("Entity"))
+            return f"{ent} 完成步骤 {int(mx):,} 次"
+        if gtype == "HerbloreBrewPotionCategory":
+            return f"炼金酿造 {int(mx):,}× {short_id(d.get('Category') or d.get('PotionClass') or '药水')}"
         return f"{gtype} (×{mx}) { {k: short_id(v) if isinstance(v, str) else v for k, v in d.items() if k not in ('Id', 'MaxProgress', 'Component', 'Conditions')} }"
+
+    def fmt_bonus_dict(self, bonuses: dict | None) -> str:
+        if not bonuses:
+            return ""
+        parts = []
+        for scope, key in (("", "Component"), ("Global.", "Global")):
+            for b in bonuses.get(key) or []:
+                st = (b.get("Stat") or {}).get("Name", "")
+                val = b.get("Value")
+                if isinstance(val, float) and abs(val) < 1.5 and ("Chance" in st or "Percent" in st or "Multiplier" in st or "Preservation" in st):
+                    parts.append(f"{scope}{st} {val*100:+.1f}%")
+                else:
+                    parts.append(f"{scope}{st} {val:+g}" if isinstance(val, (int, float)) else f"{scope}{st}={val}")
+        return ", ".join(parts)
 
 
 # ---------------------------------------------------------------------------
@@ -621,16 +661,17 @@ def generate_farming(db: GameDB) -> str:
         "",
         "## 作物",
         "",
-        "| ID | 名称 | 分类 | 等级 | 经验 | 生长(min) | 复收 | 种子 | 产物 |",
-        "|---|---|---|---|---|---|---|---|---|",
+        "| ID | 名称 | 分类 | 等级 | 经验 | 生长(min) | 复收 | 种子 | 自动化消耗 | 产物 |",
+        "|---|---|---|---|---|---|---|---|---|---|",
     ]
     for r in recs:
         rid = full_id(r["Id"])
         lvl = db.req_level(r.get("Requirements"), "Farming") or ""
         mins = round((r.get("BaseInterval") or 0) / 60000, 1)
         ing = db.fmt_costs(r.get("Ingredients"))
+        auto_cost = db.fmt_costs(r.get("AutomationCosts"))
         prod = db.fmt_item_list([r["Product"]] if r.get("Product") else [])
-        lines.append(f"| `{rid}` | {md_escape(display_name(r))} | {short_id(r.get('Category'))} | {lvl} | {r.get('BaseExperience','')} | {mins} | {r.get('Regrows',0)} | {md_escape(ing)} | {md_escape(prod)} |")
+        lines.append(f"| `{rid}` | {md_escape(display_name(r))} | {short_id(r.get('Category'))} | {lvl} | {r.get('BaseExperience','')} | {mins} | {r.get('Regrows',0)} | {md_escape(ing)} | {md_escape(auto_cost)} | {md_escape(prod)} |")
     lines.append("")
 
     if db.objs.get("GrainMillRecipe"):
@@ -857,16 +898,34 @@ def generate_shop(db: GameDB) -> str:
 def generate_upgrades_and_misc(db: GameDB) -> str:
     ups = db.objs.get("ItemUpgrade", [])
     pets = db.objs.get("Pet", [])
+    sets = db.objs.get("EquipmentSetBonus", [])
+    hjb = db.objs.get("HuntingJournalBonus", [])
+    thb = db.objs.get("ThievingHeistBonus", [])
     lines = [
-        "# 物品升级 / 宠物 / 工具带总览",
+        "# 物品升级 / 装备套装 / 宠物 / 图鉴与劫案加成总览",
         "",
-        f"> 物品升级：{len(ups)} | 宠物：{len(pets)} | 工具带槽位：{len(db.objs.get('ToolbeltSlot', []))} | Mastery Guild 加成：{len(db.objs.get('MasteryGuildBonus', []))}",
+        f"> 物品升级：{len(ups)} | 装备套装：{len(sets)} | 宠物：{len(pets)} | 狩猎图鉴加成：{len(hjb)} | 偷窃劫案加成：{len(thb)} | 工具带槽位：{len(db.objs.get('ToolbeltSlot', []))} | Mastery Guild 加成：{len(db.objs.get('MasteryGuildBonus', []))}",
         "",
-        "## 物品升级（Item Upgrades）",
+        "## 装备套装加成（Equipment Set Bonuses）",
         "",
-        "| ID | 成品 | 消耗材料/费用 | 需求 |",
+        "| ID | 套装名 | 组成件 | 套装效果 |",
         "|---|---|---|---|",
     ]
+    for sb in sorted(sets, key=lambda x: display_name(x)):
+        items_s = ", ".join(db.item_name(it) for it in (sb.get("Items") or []))
+        b_parts = []
+        for b in sb.get("Bonuses") or []:
+            cnt = b.get("ItemCount", 0)
+            mods = db.fmt_bonus_dict(b.get("Modifiers"))
+            if mods:
+                b_parts.append(f"({cnt}件) {mods}")
+        lines.append(f"| `{full_id(sb['Id'])}` | {md_escape(display_name(sb))} | {md_escape(items_s)} | {md_escape('; '.join(b_parts))} |")
+    lines.append("")
+
+    lines.append("## 物品升级（Item Upgrades）")
+    lines.append("")
+    lines.append("| ID | 成品 | 消耗材料/费用 | 需求 |")
+    lines.append("|---|---|---|---|")
     for u in sorted(ups, key=lambda x: display_name(db.items.get(x.get("UpgradedItem") or "")) or x["Id"]):
         uid = full_id(u["Id"])
         out_item = db.item_name(u.get("UpgradedItem"))
@@ -882,7 +941,204 @@ def generate_upgrades_and_misc(db: GameDB) -> str:
     for p in pets:
         lines.append(f"| `{full_id(p['Id'])}` | {md_escape(display_name(p))} | {md_escape(strip_bbcode(p.get('Description')))} |")
     lines.append("")
+
+    if hjb:
+        lines.append("## 狩猎图鉴等级加成（Hunting Journal Bonuses）")
+        lines.append("")
+        lines.append("| ID | 名称 | 加成 |")
+        lines.append("|---|---|---|")
+        for b in hjb:
+            mods = db.fmt_bonus_dict(b.get("Modifiers") or (b.get("Rewards") or {}).get("Bonuses"))
+            lines.append(f"| `{full_id(b['Id'])}` | {md_escape(display_name(b))} | {md_escape(mods or strip_bbcode(b.get('CustomDescription')))} |")
+        lines.append("")
+
+    if thb:
+        lines.append("## 偷窃劫案加成（Thieving Heist Bonuses）")
+        lines.append("")
+        lines.append("| ID | 名称 | 需求 | 加成 |")
+        lines.append("|---|---|---|")
+        for b in thb:
+            mods = db.fmt_bonus_dict(b.get("Modifiers") or (b.get("Rewards") or {}).get("Bonuses"))
+            lines.append(f"| `{full_id(b['Id'])}` | {md_escape(display_name(b))} | {md_escape(db.fmt_reqs(b.get('Requirements')))} | {md_escape(mods or strip_bbcode(b.get('CustomDescription')))} |")
+        lines.append("")
     return "\n".join(lines)
+
+
+def generate_mastery_guild(db: GameDB) -> tuple[str, dict]:
+    """Generate mastery.md and structured data/mastery_index.json across all 25 skills."""
+    cats = {full_id(c["Id"]): c for c in db.objs.get("MasteryGuildCategory", [])}
+    ranks_map = {full_id(r["Id"]): r for r in db.objs.get("MasteryGuildRank", [])}
+    bonuses_map = {full_id(b["Id"]): b for b in db.objs.get("MasteryGuildBonus", [])}
+    tasks_map = {full_id(t["Id"]): t for t in db.objs.get("MasteryGuildTask", [])}
+
+    cat_order = [
+        "MelvorBase:Novice",
+        "MelvorBase:Easy",
+        "MelvorBase:Adept",
+        "MelvorBase:Intermediate",
+        "MelvorBase:Hard",
+        "MelvorBase:Expert",
+    ]
+    cat_rank = {c: i for i, c in enumerate(cat_order)}
+
+    index_out: dict[str, dict] = {
+        "categories": {
+            cid: {
+                "name": display_name(c),
+                "points": int(c.get("BasePoints") or 0),
+                "order": cat_rank.get(cid, 99),
+            }
+            for cid, c in cats.items()
+        },
+        "skills": {},
+    }
+
+    lines = [
+        "# Melvor Idle 2 技能专精公会（Mastery Guild）与专精任务总览",
+        "",
+        f"> 离线提取自 `MelvorBase.json`：覆盖全部 **25 项技能**、**{len(tasks_map):,} 个专精任务**、**{len(ranks_map)} 个专精段位**与 **{len(bonuses_map)} 项永久段位加成**。",
+        "> **核心规划价值**：",
+        "> - 难度与点数：`Novice` (1pt) · `Easy` (2pt) · `Adept` (3pt) · `Intermediate` (5pt) · `Hard` (8pt) · `Expert` (12pt)",
+        "> - 段位阈值：Rank 1 (0%) → **Rank 2 (5%：几乎所有技能永久 +10% XP!)** → **Rank 3 (10%：核心效率质变，如采矿+5%双倍/烹饪+30熟练度/伐木+10%双倍伤害)** → **Rank 4 (20%：关键解锁)** → **Rank 5 (40%：额外工具带槽位 + 10% XP)** → Rank 6 (65%) → Rank 7 (100%)",
+        "> - **黄金法则**：在安排某技能长期挂机冲级前，先花 5–15 分钟顺手清掉该技能的 `Novice` / `Easy` 低门槛专精任务，即可白嫖 **Rank 2 (+10% XP)** 甚至 **Rank 3 效率加成**！",
+        "",
+        "## 25 技能段位加成速查表",
+        "",
+        "| 技能 | 任务数 | 总点数 | Rank 2 (5%) | Rank 3 (10%) | Rank 4 (20%) | Rank 5 (40%) |",
+        "|---|---|---|---|---|---|---|",
+    ]
+
+    skill_sections: list[str] = []
+
+    for eid in sorted(db.ec.keys()):
+        cfg = db.ec[eid]
+        if "MasteryGuildTasks" not in cfg:
+            continue
+        sname = short_id(eid)
+        rank_objs = []
+        for ref in cfg.get("MasteryGuildRanks") or []:
+            rid = ref["Id"] if isinstance(ref, dict) else ref
+            r = ranks_map.get(full_id(rid))
+            if r:
+                rank_objs.append({
+                    "id": full_id(r["Id"]),
+                    "name": display_name(r),
+                    "pct": float(r.get("PointPercentRequired") or 0.0),
+                })
+        rank_objs.sort(key=lambda x: x["pct"])
+
+        bonus_objs = []
+        for ref in cfg.get("MasteryGuildBonuses") or []:
+            bid = ref["Id"] if isinstance(ref, dict) else ref
+            b = bonuses_map.get(full_id(bid))
+            if not b:
+                continue
+            rew = b.get("Rewards") or {}
+            mod_s = db.fmt_bonus_dict(rew.get("Bonuses"))
+            cust = strip_bbcode(b.get("CustomDescription"))
+            desc = "; ".join(filter(None, [mod_s, cust])) or "—"
+            req_rank = ""
+            for req in b.get("Requirements") or []:
+                if short_id(req.get("Type")) == "MasteryGuildRank":
+                    req_rank = full_id((req.get("Data") or {}).get("Rank"))
+            bonus_objs.append({
+                "id": full_id(b["Id"]),
+                "name": display_name(b),
+                "rank_id": req_rank,
+                "effect": desc,
+            })
+
+        task_objs = []
+        total_pts = 0
+        for ref in cfg.get("MasteryGuildTasks") or []:
+            tid = full_id(ref["Id"] if isinstance(ref, dict) else ref)
+            t = tasks_map.get(tid)
+            if not t:
+                continue
+            cat_id = full_id(t.get("Category"))
+            pts = int((cats.get(cat_id) or {}).get("BasePoints") or 0)
+            total_pts += pts
+            goal = t.get("Goal")
+            cond = t.get("ConditionGoal")
+            trig = t.get("TriggerGoal")
+            desc_parts = []
+            max_prog = 0
+            goal_type = ""
+            target_id = ""
+            if goal:
+                desc_parts.append(db.fmt_goal(goal))
+                goal_type = short_id(goal.get("Type"))
+                gd = goal.get("Data") or {}
+                max_prog = gd.get("MaxProgress") or 0
+                target_id = gd.get("Recipe") or gd.get("Item") or gd.get("Enemy") or gd.get("Course") or gd.get("Animal") or ""
+            if cond:
+                desc_parts.append("条件:" + db.fmt_req(cond))
+                if not goal_type:
+                    goal_type = "Cond:" + short_id(cond.get("Type"))
+            if trig:
+                desc_parts.append("触发:" + short_id(trig.get("Type")))
+                if not goal_type:
+                    goal_type = "Trig:" + short_id(trig.get("Type"))
+            cust = strip_bbcode(t.get("CustomDescription"))
+            if cust and cust != "This is a custom description for a custom task":
+                desc_parts.append(cust)
+            task_objs.append({
+                "id": tid,
+                "category": short_id(cat_id),
+                "category_order": cat_rank.get(cat_id, 99),
+                "points": pts,
+                "goal_type": goal_type,
+                "target": target_id,
+                "max_progress": max_prog,
+                "has_goal": goal is not None,
+                "has_condition": cond is not None,
+                "has_trigger": trig is not None,
+                "description": " | ".join(desc_parts) or tid,
+            })
+
+        task_objs.sort(key=lambda x: (x["category_order"], x["max_progress"] if isinstance(x["max_progress"], (int, float)) else 0, x["id"]))
+
+        # Map rank index -> effect
+        b_by_rank = {b["rank_id"]: b["effect"] for b in bonus_objs}
+        r_eff = []
+        for idx in (1, 2, 3, 4):
+            if idx < len(rank_objs):
+                rid = rank_objs[idx]["id"]
+                req_pts = int(round(rank_objs[idx]["pct"] * total_pts))
+                eff = b_by_rank.get(rid, "—")
+                r_eff.append(f"({req_pts}pt) {eff}")
+            else:
+                r_eff.append("—")
+        lines.append(f"| **{sname}** | {len(task_objs)} | {total_pts} | {md_escape(r_eff[0])} | {md_escape(r_eff[1])} | {md_escape(r_eff[2])} | {md_escape(r_eff[3])} |")
+
+        # Add Novice/Easy quick-win sample for each skill
+        quick_tasks = [t for t in task_objs if t["category"] in ("Novice", "Easy")][:10]
+        sec = [f"### {sname}（共 {len(task_objs)} 任务 / {total_pts} 点，Rank 2 需 {int(round(0.05*total_pts))} 点，Rank 3 需 {int(round(0.10*total_pts))} 点）", ""]
+        for qt in quick_tasks:
+            sec.append(f"- `[{qt['category']} +{qt['points']}pt]` {qt['description']} (`{short_id(qt['id'])}`)")
+        sec.append("")
+        skill_sections.append("\n".join(sec))
+
+        index_out["skills"][eid] = {
+            "skill": sname,
+            "total_tasks": len(task_objs),
+            "total_points": total_pts,
+            "ranks": [
+                {
+                    **r,
+                    "points_required": int(round(r["pct"] * total_pts)),
+                    "bonus": b_by_rank.get(r["id"], ""),
+                }
+                for r in rank_objs
+            ],
+            "tasks": task_objs,
+        }
+
+    lines.append("")
+    lines.append("## 各技能速刷专精任务示例（Novice / Easy，完整 3,403 项请调用 `get_mastery_tasks`）")
+    lines.append("")
+    lines.extend(skill_sections)
+    return "\n".join(lines), index_out
 
 
 def generate_interlinks(db: GameDB) -> tuple[str, int]:
@@ -1047,8 +1303,10 @@ def write_readme(db: GameDB, skill_files: list[str], n_edges: int) -> str:
         "",
         f"- **物品**：{len(db.objs.get('Item', []))} 件（含售价、装备属性、食物回血、工具带、开箱/埋葬属性，索引见 `data/items_index.json`）",
         f"- **任务（Quests）**：{len(db.objs.get('Quest', []))} 个（Act 1/2 主线 + 支线 + 步骤/材料/奖励，见 `quests.md`）",
+        f"- **技能专精公会（Mastery Guild）**：25 技能 / {len(db.objs.get('MasteryGuildTask', [])):,} 个专精任务 / {len(db.objs.get('MasteryGuildRank', []))} 段位 / {len(db.objs.get('MasteryGuildBonus', []))} 永久加成（见 `mastery.md` 与 `data/mastery_index.json`）",
         f"- **商店（Shop）**：{len(db.objs.get('ShopPurchase', []))} 件（含**真实价格**、限购、解锁条件与加成，见 `skills/shop.md`）",
         f"- **战斗（Combat）**：{len(db.objs.get('CombatArea', []))} 区域 / {len(db.objs.get('Dungeon', []))} 地下城 / {len(db.objs.get('Enemy', []))} 敌人与掉落表 / {len(db.objs.get('MagicSpell', []))} 法术 / {len(db.objs.get('Prayer', []))} 祷告 / {len(db.objs.get('SlayerMaster', []))} 屠魔大师（见 `skills/combat.md`）",
+        f"- **装备套装 / 升级 / 宠物**：{len(db.objs.get('EquipmentSetBonus', []))} 套装 / {len(db.objs.get('ItemUpgrade', []))} 升级 / {len(db.objs.get('Pet', []))} 宠物（见 `skills/upgrades.md`）",
         f"- **跨系统物品联动**：{n_edges} 条（见 `interlinks.md`）",
         "",
         "## 文档导航（MCP `browse_knowledge(topic)`）",
@@ -1057,8 +1315,9 @@ def write_readme(db: GameDB, skill_files: list[str], n_edges: int) -> str:
         "|---|---|",
         "| `readme` | 本索引 |",
         "| `quests` | **主线/支线任务全攻略（步骤、提交材料、目标、奖励）** |",
+        "| `mastery` | **25 技能专精公会段位加成与速刷专精任务总览** |",
         "| `mechanics` | 核心机制、公式（XP、破岩率、伐木血量、战斗三角/元素、离线、被动技能） |",
-        "| `planning` | **任务优先 + 并行规划 + 队列批处理计划编排指南** |",
+        "| `planning` | **多维度规划（主线 + 专精公会 + 套装/工具带 + 被动技能）与批处理队列规范** |",
         "| `interlinks` | 跨技能 / 战斗 / 任务 / 商店物品流转表 |",
     ]
     for sf in sorted(skill_files):
@@ -1086,6 +1345,12 @@ def main() -> int:
     (HERE / "quests.md").write_text(quests_md, encoding="utf-8")
     (DATA_DIR / "quests_index.json").write_text(json.dumps(quests_idx, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"quests.md ({len(quests_idx)} quests)")
+
+    # 1b. Mastery Guild (all 25 skills, 3,403 tasks, ranks & bonuses)
+    mastery_md, mastery_idx = generate_mastery_guild(db)
+    (HERE / "mastery.md").write_text(mastery_md, encoding="utf-8")
+    (DATA_DIR / "mastery_index.json").write_text(json.dumps(mastery_idx, ensure_ascii=False), encoding="utf-8")
+    print(f"mastery.md ({len(mastery_idx['skills'])} skills, {sum(s['total_tasks'] for s in mastery_idx['skills'].values())} tasks)")
 
     # 2. Skills
     generated_skills: dict[str, str] = {

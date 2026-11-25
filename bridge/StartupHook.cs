@@ -57,7 +57,7 @@ namespace Melvor2Bridge
     internal static class Bridge
     {
         public const int Port = 17817;
-        public const string BridgeVersion = "2.1.0";
+        public const string BridgeVersion = "2.2.0";
 
         private static WeakReference _gameRef;
         private static readonly Queue<Action> _mainJobs = new Queue<Action>();
@@ -161,6 +161,9 @@ namespace Melvor2Bridge
                         break;
                     case "/passive":
                         json = Safe(() => StateQueries.BuildPassive());
+                        break;
+                    case "/mastery":
+                        json = Safe(() => StateQueries.BuildMastery(query["skill"]));
                         break;
                     case "/probe":
                         json = Safe(() => StateQueries.Probe(body));

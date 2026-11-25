@@ -208,6 +208,15 @@ namespace Melvor2Bridge
                     CheckProp(report, "Farming.ActivePlots", farm, "ActivePlots", fatal: false);
                     CheckProp(report, "Ranching.ActiveLand", ranch, "ActiveLand", fatal: false);
                 });
+
+                CheckSubsystem(report, "MasteryGuild", () =>
+                {
+                    var mg = Bridge.FindComponent(game, "MelvorBase:Mining", "MasteryGuild");
+                    CheckProp(report, "MasteryGuild.CurrentPoints", mg, "CurrentPoints", fatal: false);
+                    CheckProp(report, "MasteryGuild.TotalTaskPoints", mg, "TotalTaskPoints", fatal: false);
+                    CheckProp(report, "MasteryGuild.CurrentRank", mg, "CurrentRank", fatal: false);
+                    CheckProp(report, "MasteryGuild.ActiveTasks", mg, "ActiveTasks", fatal: false);
+                });
             }
             catch (Exception e)
             {

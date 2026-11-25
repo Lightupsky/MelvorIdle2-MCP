@@ -1,4 +1,4 @@
-# One-Click Setup Wizard for Melvor2-MCP (V0.0.1-0116a1)
+# One-Click Setup Wizard for Melvor2-MCP (reads VERSION.txt automatically)
 #
 # Performs:
 #   1. Creates a local Python virtual environment (.venv) and installs fastmcp.

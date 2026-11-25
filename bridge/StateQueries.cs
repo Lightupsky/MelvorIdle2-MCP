@@ -57,12 +57,32 @@ namespace Melvor2Bridge
                     totalLevel += level;
                     var sname = entity.GetType().Name;
                     if (sname.EndsWith("Entity")) sname = sname.Substring(0, sname.Length - 6);
-                    skills[sname] = new Dictionary<string, object>
+                    var skEntry = new Dictionary<string, object>
                     {
                         ["id"] = Bridge.Prop(entity, "Id")?.ToString(),
                         ["level"] = level,
                         ["xp"] = (long)xp
                     };
+                    if (comps.Contains("MasteryGuild"))
+                    {
+                        var mg = comps["MasteryGuild"];
+                        var curPts = Convert.ToInt32(Bridge.Prop(mg, "CurrentPoints") ?? 0);
+                        var totPts = Convert.ToInt32(Bridge.Prop(mg, "TotalTaskPoints") ?? 0);
+                        var curRank = Bridge.Prop(mg, "CurrentRank");
+                        var ranksList = Bridge.Field(mg, "_orderedRanks") as IList;
+                        int rankNum = 1;
+                        if (ranksList != null && curRank != null)
+                        {
+                            for (int ri = 0; ri < ranksList.Count; ri++)
+                                if (ReferenceEquals(ranksList[ri], curRank)) { rankNum = ri + 1; break; }
+                        }
+                        skEntry["mastery_rank"] = rankNum;
+                        skEntry["mastery_rank_name"] = Bridge.NameOf(curRank);
+                        skEntry["mastery_points"] = curPts;
+                        skEntry["mastery_total"] = totPts;
+                        skEntry["mastery_pct"] = totPts > 0 ? Math.Round(curPts * 100.0 / totPts, 1) : 0.0;
+                    }
+                    skills[sname] = skEntry;
                 }
             }
             result["total_level"] = totalLevel;
@@ -604,6 +624,87 @@ namespace Melvor2Bridge
             outDict["ranching_requires_attention"] = Bridge.Prop(ranch, "RequiresAttention");
 
             return Bridge.Serialize(outDict);
+        }
+
+        public static string BuildMastery(string skillFilter)
+        {
+            var game = Bridge.GetGame();
+            if (game == null) return Bridge.Serialize(new { error = "game not found" });
+
+            string needle = string.IsNullOrWhiteSpace(skillFilter) ? null : skillFilter.Split(':')[^1].Trim();
+            var skillsOut = new Dictionary<string, object>();
+            var all = Bridge.GetAllEntities(game);
+            if (all != null)
+            {
+                foreach (var entity in all)
+                {
+                    var comps = Bridge.Prop(entity, "Components") as IDictionary;
+                    if (comps == null || !comps.Contains("MasteryGuild")) continue;
+                    var eid = Bridge.Prop(entity, "Id")?.ToString() ?? "";
+                    var sname = entity.GetType().Name;
+                    if (sname.EndsWith("Entity")) sname = sname.Substring(0, sname.Length - 6);
+                    if (needle != null
+                        && sname.IndexOf(needle, StringComparison.OrdinalIgnoreCase) < 0
+                        && eid.IndexOf(needle, StringComparison.OrdinalIgnoreCase) < 0)
+                        continue;
+
+                    var mg = comps["MasteryGuild"];
+                    int curPts = Convert.ToInt32(Bridge.Prop(mg, "CurrentPoints") ?? 0);
+                    int totPts = Convert.ToInt32(Bridge.Prop(mg, "TotalTaskPoints") ?? 0);
+                    var curRank = Bridge.Prop(mg, "CurrentRank");
+                    var ranksList = Bridge.Field(mg, "_orderedRanks") as IList;
+                    int rankNum = 1;
+                    if (ranksList != null && curRank != null)
+                    {
+                        for (int ri = 0; ri < ranksList.Count; ri++)
+                            if (ReferenceEquals(ranksList[ri], curRank)) { rankNum = ri + 1; break; }
+                    }
+
+                    int completedCount = 0;
+                    int totalTasks = 0;
+                    var taskList = needle != null ? new List<Dictionary<string, object>>() : null;
+                    foreach (var at in Bridge.EnumerateDictionaryValues(Bridge.Prop(mg, "ActiveTasks")))
+                    {
+                        totalTasks++;
+                        bool isDone = Bridge.Prop(at, "IsComplete") is bool c && c;
+                        if (isDone) completedCount++;
+                        if (taskList != null)
+                        {
+                            var tdata = Bridge.Prop(at, "Task");
+                            var goal = Bridge.Prop(at, "ActiveGoal");
+                            taskList.Add(new Dictionary<string, object>
+                            {
+                                ["id"] = Bridge.Prop(tdata, "Id")?.ToString(),
+                                ["category"] = Bridge.Prop(Bridge.Prop(tdata, "Category"), "Id")?.ToString(),
+                                ["completed"] = isDone,
+                                ["progress"] = goal != null ? Bridge.Prop(goal, "CurrentProgress") : (isDone ? 1 : 0),
+                                ["max_progress"] = goal != null ? Bridge.Prop(goal, "MaxProgress") : 1
+                            });
+                        }
+                    }
+
+                    var entry = new Dictionary<string, object>
+                    {
+                        ["entity"] = eid,
+                        ["skill"] = sname,
+                        ["rank_number"] = rankNum,
+                        ["rank_name"] = Bridge.NameOf(curRank),
+                        ["points"] = curPts,
+                        ["total_points"] = totPts,
+                        ["percent"] = totPts > 0 ? Math.Round(curPts * 100.0 / totPts, 1) : 0.0,
+                        ["completed_tasks"] = completedCount,
+                        ["total_tasks"] = totalTasks
+                    };
+                    if (taskList != null) entry["tasks"] = taskList;
+                    skillsOut[sname] = entry;
+                }
+            }
+
+            return Bridge.Serialize(new Dictionary<string, object>
+            {
+                ["source"] = "live_bridge",
+                ["skills"] = skillsOut
+            });
         }
 
         // ------------------------------------------------------------------

@@ -348,7 +348,7 @@
 |---|---|---|---|---|---|---|---|---|
 | `MelvorBase:SuperRunecraftingPotionP1A` | Super Runecrafting Potion P1-A | 80 | 31 |  |  | Pack of Vials, Sporlyle Herb, Decay Rune | 15× Super Runecrafting Potion P1-A | Shop:Super Potion Research |
 | `MelvorBase:SuperRunecraftingPotionP2A` | Super Runecrafting Potion P2-A | 92 | 40 |  |  | Pack of Vials, Sporlyle Herb, 2× Decay Rune, Glow Spore | 20× Super Runecrafting Potion P2-A | ItemStatistic({'Value': 20000, 'Statistic': 'HerbloreItemGained', 'Item': 'SuperRunecraftingPotionP1A'}) |
-| `MelvorBase:SuperRunecraftingPotionP2B` | Super Runecrafting Potion P2-B | 92 | 40 |  |  | Pack of Vials, Barrentoe Herb, 2× Blood Rune, Glow Spore | 20× Super Runecrafting Potion P2-B | ItemStatistic({'Value': 11000, 'Statistic': 'HerbloreItemGained', 'Item': 'SuperRunecraftingPotionP1A'}) |
+| `MelvorBase:SuperRunecraftingPotionP2B` | Super Runecrafting Potion P2-B | 92 | 40 |  |  | Pack of Vials, Barrentoe Herb, 2× Blood Rune, Glow Spore | 20× Super Runecrafting Potion P2-B | ItemStatistic({'Value': 20000, 'Statistic': 'HerbloreItemGained', 'Item': 'SuperRunecraftingPotionP1A'}) |
 
 ## SuperSlayerPotion
 
